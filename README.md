@@ -3,18 +3,18 @@ This is an implementation of the Luhn Algorithm in PHP.
 
 ## Usage
 Use the class like this:
-`
-$luhn = new LuhnAlgorithm('1234 567-89');
-$luhn->isCompletelyValid();
-`
+
+	$luhn = new LuhnAlgorithm('1234 567-89');
+	$luhn->isCompletelyValid();
+
 Note that you the number may be a string that does contain non-numeric characters,
 these will be stripped away.
 The class contains some static functions as well. This will return the Luhn
 checksum of a number:
-`
-$number = '1234 567-89';
-$luhnCheckSum = LuhnAlgorithm::calculateChecksum($number);
-`
+
+	$number = '1234 567-89';
+	$luhnCheckSum = LuhnAlgorithm::calculateChecksum($number);
+
 
 ## License
 Copyright 2013 Niklas Ekman, nikl.ekman@gmail.com
