@@ -22,8 +22,8 @@
  * @link http://en.wikipedia.org/wiki/Luhn_algorithm Go to Wikipedia for more
  * info on the Luhn Alorithm
  * 
- * @author Niklas Ekman<nikl.ekman@gmail.com>
- * @version 2013-09-15
+ * @author Niklas Ekman <nikl.ekman@gmail.com>
+ * @version 2014-02-04
  */
 class LuhnAlgorithm {
 
@@ -152,15 +152,12 @@ class LuhnAlgorithm {
 	 * @throws InvalidArgumentException If the string is less than 2 numbers
 	 */
 	public function setNumber($number, $withCheckDigit = true) {
-		if (!is_numeric($number)) {
+		// Validate the number
+		if (preg_match("/\d{6}\s?-?\s?\d{4}/", $number) !== 0) {
 			throw new InvalidArgumentException('Number must be numeric');
 		}
 
-		// Store number as a string since we are going to use allot of
-		// digits at position X
-		if (!is_string($number)) {
-			$number = strval($number);
-		}
+		$number = strval(intval($number));
 
 		// Pretty safe to say that we need more then 1 number to be able to do
 		// the Luhn Algorithm
