@@ -16,6 +16,13 @@ checksum of a number:
 	$number = '123456789';
 	$luhnCheckSum = LuhnAlgorithm::calculateChecksum($number);
 
+## Regex
+There will be a regex check agains the number provided as argument
+to this class. Override the function below to provide your own regex.
+
+	protected static function numberRegex() {
+		return "/\d{6}\s?-?\s?\d{3}\d?/";
+	}
 
 ## License
 Copyright 2013 Niklas Ekman, nikl.ekman@gmail.com

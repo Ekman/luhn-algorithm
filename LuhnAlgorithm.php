@@ -32,12 +32,11 @@ class LuhnAlgorithm {
 	private $checkDigit;
 
 	/**
-	 * The number can contain other signs then numbers, for instance 
-	 * whitespace; <b>123 456 789</b>, these will be stripped
-	 * away.
-	 * @param string|int $number String or int
-	 * @param bool $withCheckDigit If the number contains a checkdigit already
-	 * @throws InvalidArgumentException If the string is less than 2 numbers
+	 * The number must be in the format <b>XXXXXX-XXX(D)</b> or
+	 * <b>XXXXXX - XXX(x)</b> or any permutations of those two. If the 
+	 * checkdigit (D) is not supplied, it will be calculated
+	 * @param string|int $number The personnumer or organizational number
+	 * @throws InvalidArgumentException
 	 */
 	function __construct($number, $withCheckDigit = true) {
 		$this->setNumber($number, $withCheckDigit);
@@ -60,9 +59,12 @@ class LuhnAlgorithm {
 	 * @return int Checksum
 	 */
 	public static function calculateChecksum($number, $length = null) {
-		if (!is_string($number)) {
-			$number = strval($number);
+		// Validate the number
+		if (preg_match(self::numberRegex(), $number) !== 1) {
+			throw new \InvalidArgumentException("{$number} is an invalid format");
 		}
+
+		$number = strval(self::stringToInteger($number));
 
 		if ($length === null) {
 			$length = strlen($number);
@@ -100,7 +102,7 @@ class LuhnAlgorithm {
 	 */
 	public static function calculcateCheckDigit($number) {
 		// Get the checksum
-		$checkSum = strval(self::calculateChecksum($number));
+		$checkSum = strval(self::calculateChecksum($number . 0));
 		// Get the last digit of the checksum
 		$checkDigit = intval($checkSum[strlen($checkSum) - 1]);
 
@@ -113,7 +115,7 @@ class LuhnAlgorithm {
 	 * @return bool true if checkdigit is correct
 	 */
 	public function isValidCheckDigit() {
-		$checkDigit = self::calculcateCheckDigit($this->number . 0, $this->nDigits + 1);
+		$checkDigit = self::calculcateCheckDigit($this->number);
 		// Validate
 		return $checkDigit === $this->checkDigit;
 	}
@@ -144,30 +146,41 @@ class LuhnAlgorithm {
 	}
 
 	/**
-	 * The number can contain other signs then numbers, for instance 
-	 * whitespace; <b>123 456 789</b>, these will be stripped
-	 * away.
-	 * @param string|int $number String or int
-	 * @param bool $withCheckDigit If the number contains a checkdigit already
-	 * @throws InvalidArgumentException If the string is less than 2 numbers
+	 * What regex to use when validating numbers? Override this to provide
+	 * something else
+	 * @return string
+	 */
+	protected static function numberRegex() {
+		return "/\d{6}\s?-?\s?\d{3}\d?/";
+	}
+
+	/**
+	 * Fix a string so that it only contains numbers
+	 * @param string $integer String to convert to integer
+	 * @return int An integer
+	 */
+	public static function stringToInteger($integer) {
+		return intval(preg_replace("/[^0-9]/", "", $integer));
+	}
+
+	/**
+	 * The number must be in the format <b>XXXXXX-XXX(D)</b> or
+	 * <b>XXXXXX - XXX(x)</b> or any permutations of those two. If the 
+	 * checkdigit (D) is not supplied, it will be calculated
+	 * @param string|int $number The personnumer or organizational number
+	 * @throws InvalidArgumentException
 	 */
 	public function setNumber($number, $withCheckDigit = true) {
 		// Validate the number
-		if (preg_match("/\d{6}\s?-?\s?\d{4}/", $number) !== 0) {
-			throw new InvalidArgumentException('Number must be numeric');
+		if (preg_match(self::numberRegex(), $number) !== 1) {
+			throw new \InvalidArgumentException("{$number} is an invalid format");
 		}
 
-		$number = strval(intval($number));
-
-		// Pretty safe to say that we need more then 1 number to be able to do
-		// the Luhn Algorithm
+		$number = strval(self::stringToInteger($number));
 		$length = strlen($number);
-		if ($length <= 1) {
-			throw new InvalidArgumentException('Length must be longer then 1');
-		}
 
 		// If number does not include checkdigit, calculate it!
-		if ($withCheckDigit === false) {
+		if (!$withCheckDigit) {
 			$this->checkDigit = self::calculcateCheckDigit($number);
 		} else {
 			// Extract check digit from the number
