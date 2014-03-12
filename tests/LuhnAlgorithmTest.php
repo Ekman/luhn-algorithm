@@ -116,7 +116,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testStringToInteger($number) {
 		$int = \LuhnAlgorithm::toInteger($number);
-		$this->assertTrue(is_int($int));
+		$this->assertTrue(is_numeric($int));
 	}
 
 	/**
