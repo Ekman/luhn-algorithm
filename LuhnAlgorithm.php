@@ -65,7 +65,7 @@ class LuhnAlgorithm {
 	 * @return int Checksum
 	 */
 	public static function calculateChecksum($number, $length = 0) {
-		$number = strval(self::stringToInteger($number));
+		$number = strval(self::toInteger($number));
 
 		if ($length === 0) {
 			$length = strlen($number);
@@ -80,7 +80,7 @@ class LuhnAlgorithm {
 
 			// If a 2 digit number, split and add togheter
 			if ($tmp > 9) {
-				$tmp = intval($tmp / 10) + intval($tmp % 10);
+				$tmp = ($tmp / 10) + ($tmp % 10);
 			}
 
 			// Sum it upp
@@ -147,12 +147,13 @@ class LuhnAlgorithm {
 	}
 
 	/**
-	 * Fix a string so that it only contains numbers
-	 * @param string $integer String to convert to integer
-	 * @return int An integer
+	 * Remove all but numbers from a string
+	 * 
+	 * @param string $string String to "convert" to integer
+	 * @return string String containing only numbers
 	 */
-	public static function stringToInteger($integer) {
-		return intval(preg_replace("/[^0-9]/", "", $integer));
+	public static function toInteger($string) {
+		return preg_replace("/[^\d]/", "", $string);
 	}
 
 	/**
@@ -162,7 +163,7 @@ class LuhnAlgorithm {
 	 * included in $number?
 	 */
 	public function setNumber($number, $withCheckDigit = true) {
-		$number = strval(self::stringToInteger($number));
+		$number = strval(self::toInteger($number));
 		$length = strlen($number);
 
 		// If number does not include checkdigit, calculate it!

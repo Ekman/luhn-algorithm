@@ -50,7 +50,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provider
 	 */
 	public function testCalculateChecksum($number) {
-		$number = \LuhnAlgorithm::stringToInteger($number);
+		$number = \LuhnAlgorithm::toInteger($number);
 		$checkSum = \LuhnAlgorithm::calculateChecksum($number);
 		$this->assertEquals(0, $checkSum % 10);
 	}
@@ -60,7 +60,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provider
 	 */
 	public function testCalculcateCheckDigit($number) {
-		$number = strval(\LuhnAlgorithm::stringToInteger($number));
+		$number = strval(\LuhnAlgorithm::toInteger($number));
 		$last = strlen($number) - 1;
 		
 		// Check digit is the last number
@@ -95,7 +95,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetNumber($number) {
 		$this->object->setNumber($number, true);
-		$number = \LuhnAlgorithm::stringToInteger($number);
+		$number = \LuhnAlgorithm::toInteger($number);
 		$this->assertEquals($number, $this->object->getNumber());
 	}
 
@@ -115,7 +115,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provider
 	 */
 	public function testStringToInteger($number) {
-		$int = \LuhnAlgorithm::stringToInteger($number);
+		$int = \LuhnAlgorithm::toInteger($number);
 		$this->assertTrue(is_int($int));
 	}
 
