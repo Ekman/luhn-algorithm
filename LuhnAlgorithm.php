@@ -152,7 +152,7 @@ class LuhnAlgorithm {
 	 * @param string $string String to "convert" to integer
 	 * @return string String containing only numbers
 	 */
-	public static function toInteger($string) {
+	private static function toInteger($string) {
 		return preg_replace("/[^\d]/", "", $string);
 	}
 
