@@ -24,11 +24,11 @@
  */
 
 /**
- * Apply the Luhn Algorithm to a number.
+ * Apply the Luhn Algorithm to a number
  *  
  * @link http://en.wikipedia.org/wiki/Luhn_algorithm 
  * @author Niklas Ekman <nikl.ekman@gmail.com>
- * @version 2014-02-07
+ * @package nekman/luhn-algorithm
  */
 class LuhnAlgorithm {
 

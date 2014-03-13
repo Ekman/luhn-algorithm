@@ -1,21 +1,19 @@
 {
 	"name": "nekman/luhn-algorithm",
 	"type": "library",
-	"description": "Implementation of the Luhn algorithm in PHP",
+	"description": "Implementation of the Luhn algorithm in PHP. Used in validation of credit card numbers and some national identification numbers.",
 	"keywords": [
 		"luhn",
 		"credit card",
 		"identification number",
 		"validation"
 	],
-	"homepage": "https://github.com/Ekman/Luhn-Algorithm",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Niklas Ekman",
 			"email": "nikl.ekman@gmail.com",
-			"homepage": "http://www.codr.se",
-			"role": "Developer"
+			"homepage": "http://www.codr.se"
 		}
 	],
 	"support": {
