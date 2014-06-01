@@ -3,6 +3,11 @@ This is an implementation of the Luhn Algorithm in PHP. The Luhn Algorithm is
 used to validate things like credit cards and national identifcation numbers.
 More information on the algorithm can be found at [Wikipedia](http://en.wikipedia.org/wiki/Luhn_algorithm)
 
+## Installation
+Can be installed using composer:
+
+	"nekman/luhn-algorithm": "2.*"
+
 ## Usage
 Use the class like this:
 
