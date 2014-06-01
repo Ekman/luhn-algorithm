@@ -6,7 +6,7 @@ More information on the algorithm can be found at [Wikipedia](http://en.wikipedi
 ## Usage
 Use the class like this:
 
-	$luhn = new LuhnAlgorithm('123456789');
+	$luhn = new \Nekman\LuhnAlgorithm\LuhnAlgorithm('123456789');
 	$luhn->isCompletelyValid();
 
 
@@ -14,7 +14,7 @@ The class contains some static functions as well. This will return the Luhn
 checksum of a number:
 
 	$number = '123456789';
-	$luhnCheckSum = LuhnAlgorithm::calculateChecksum($number);
+	$luhnCheckSum = \Nekman\LuhnAlgorithm\LuhnAlgorithm::calculateChecksum($number);
 
 ### Personnummer
 If you'd like to validate the input to the class, extend it and do a regex check.

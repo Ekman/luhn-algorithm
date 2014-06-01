@@ -23,7 +23,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-require_once(dirname(__FILE__) . "/LuhnAlgorithm.php");
+require_once(dirname(__FILE__) . '../vendor/autoload.php');
+
+use Nekman\LuhnAlgorithm\LuhnAlgorithm as LuhnAlgorithm;
 
 /**
  * Extends LuhnAlgorithm and makes sure that the number supplied is a valid
@@ -32,7 +34,7 @@ require_once(dirname(__FILE__) . "/LuhnAlgorithm.php");
  * @author Niklas Ekman <nikl.ekman@gmail.com>
  * @version 2014-02-07
  */
-class Personnumer extends \LuhnAlgorithm {
+class Personnumer extends LuhnAlgorithm {
 
 	/**
 	 * Validate an input and see if it can be a valid personnumer
@@ -40,7 +42,7 @@ class Personnumer extends \LuhnAlgorithm {
 	 * @return type
 	 */
 	public static function isValid($input) {
-		return preg_match("/^\d{2}[0-1]\d[0-3]\d\s?-?\s?\d{4}$/", trim($input)) !== false;
+		return preg_match("/^\d{2}[0-1]\d[0-3]\d\s?-?\s?\d{4}$/", trim($input)) === 1;
 	}
 
 	/**

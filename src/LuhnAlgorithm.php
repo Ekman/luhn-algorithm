@@ -23,6 +23,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+namespace Nekman\LuhnAlgorithm;
+
 /**
  * Apply the Luhn Algorithm to a number
  *  
