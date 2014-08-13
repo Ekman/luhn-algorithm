@@ -67,7 +67,7 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 		$checkDigit = $number[$last];
 		$number = substr($number, 0, $last);
 		
-		$calcCheckDigit = LuhnAlgorithm::calculcateCheckDigit($number);
+		$calcCheckDigit = LuhnAlgorithm::calculateCheckDigit($number);
 		$this->assertEquals($checkDigit, $calcCheckDigit);
 	}
 

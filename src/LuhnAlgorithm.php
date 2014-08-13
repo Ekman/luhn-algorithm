@@ -103,7 +103,7 @@ class LuhnAlgorithm {
 	 * @param type $number
 	 * @return type
 	 */
-	public static function calculcateCheckDigit($number) {
+	public static function calculateCheckDigit($number) {
 		// Get the checksum
 		$checkSum = strval(self::calculateChecksum($number . 0));
 		// Get the last digit of the checksum
@@ -118,7 +118,7 @@ class LuhnAlgorithm {
 	 * @return bool true if checkdigit is correct
 	 */
 	public function isValidCheckDigit() {
-		$checkDigit = self::calculcateCheckDigit($this->number);
+		$checkDigit = self::calculateCheckDigit($this->number);
 		// Validate
 		return $checkDigit === $this->checkDigit;
 	}
@@ -170,7 +170,7 @@ class LuhnAlgorithm {
 
 		// If number does not include checkdigit, calculate it!
 		if (!$withCheckDigit) {
-			$this->checkDigit = self::calculcateCheckDigit($number);
+			$this->checkDigit = self::calculateCheckDigit($number);
 		} else {
 			// Extract check digit from the number
 			$this->checkDigit = intval($number[$length - 1]);
