@@ -56,10 +56,10 @@ class LuhnAlgorithmTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers LuhnAlgorithm::calculcateCheckDigit
+	 * @covers LuhnAlgorithm::calculateCheckDigit
 	 * @dataProvider provider
 	 */
-	public function testCalculcateCheckDigit($number) {
+	public function testCalculateCheckDigit($number) {
 		$number = strval(LuhnAlgorithm::toInteger($number));
 		$last = strlen($number) - 1;
 		
