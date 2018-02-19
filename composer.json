@@ -4,12 +4,16 @@
 	"description": "Implementation of the Luhn algorithm in PHP. Used in validation of credit card numbers and some national identification numbers.",
 	"keywords": [
 		"luhn",
-		"credit card",
-		"identification number",
+		"credit",
+		"card",
+		"identification",
 		"validation"
 	],
+	"require": {
+		"php": ">=7.0"
+	},
 	"require-dev": {
-		"phpunit/phpunit": "4.1.*"
+		"phpunit/phpunit": "^6.5"
 	},
 	"license": "MIT",
 	"authors": [
@@ -23,12 +27,14 @@
 		"issues": "https://github.com/Ekman/Luhn-Algorithm/issues",
 		"source": "https://github.com/Ekman/Luhn-Algorithm"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "3.7.*"
-	},
 	"autoload": {
 		"psr-4": {
 			"Nekman\\LuhnAlgorithm\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Nekman\\LuhnAlgorithm\\Test\\": "tests"
 		}
 	}
 }
