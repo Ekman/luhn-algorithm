@@ -40,7 +40,7 @@ class LuhnAlgorithm {
 
 	/**
 	 * Set number that the instance should handle.
-	 * @param sting|int $number Number in string or int format
+	 * @param string|int $number Number in string or int format
 	 * @param bool $withCheckDigit [Defaults to true] <br> Is the check digit
 	 * included in $number?
 	 */
@@ -51,7 +51,7 @@ class LuhnAlgorithm {
 	/**
 	 * Validate according to the Luhn Algorithm
 	 * @return bool true if valid
-	 * @throws InvalidArgumentException If value is null
+	 * @throws \InvalidArgumentException If value is null
 	 */
 	public function isValid() {
 		$checksum = self::calculateChecksum($this->number . $this->checkDigit, $this->nDigits + 1);
@@ -100,8 +100,8 @@ class LuhnAlgorithm {
 
 	/**
 	 * Calculate the checkdigit from a number
-	 * @param type $number
-	 * @return type
+	 * @param string $number
+	 * @return int
 	 */
 	public static function calculateCheckDigit($number) {
 		// Get the checksum
@@ -160,7 +160,7 @@ class LuhnAlgorithm {
 
 	/**
 	 * Set number that the instance should handle.
-	 * @param sting|int $number Number in string or int format
+	 * @param string|int $number Number in string or int format
 	 * @param bool $withCheckDigit [Defaults to true] <br> Is the check digit
 	 * included in $number?
 	 */
