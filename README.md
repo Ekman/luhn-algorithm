@@ -1,4 +1,6 @@
-# Luhn Algorithm in PHP
+# Luhn Algorithm
+
+[![Build Status](https://travis-ci.org/Ekman/Luhn-Algorithm.svg?branch=master)](https://travis-ci.org/Ekman/Luhn-Algorithm)
 
 This is an implementation of the Luhn Algorithm in PHP. The Luhn Algorithm is
 used to validate things like credit cards and national identifcation numbers.
@@ -26,5 +28,5 @@ if ($luhn->isValid(123456789)) {
 
 $checkSum = $luhn->calcCheckSum(123456789);
 
-$checkDigit = $luhn->calcCheckDigit();
+$checkDigit = $luhn->calcCheckDigit(123456789);
 ```
