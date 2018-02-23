@@ -30,3 +30,11 @@ $checkSum = $luhn->calcCheckSum(123456789);
 
 $checkDigit = $luhn->calcCheckDigit(123456789);
 ```
+
+## Changelog
+
+* 4.0.0 - Rewrite of the implementation.
+* 3.0.0 - Completely restructured the interface of the library. 
+* 2.0.1 - Fixed typos in interface.
+* 2.0.0 - Added namespace.
+* 1.0.0 - Initial release.
