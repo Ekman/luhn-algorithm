@@ -52,6 +52,7 @@ class LuhnAlgorithmTest extends TestCase {
 			["410321-9202", true],
 			["410321 - 9202", true],
 			[4103219202, true],
+			[31997233700020, true],
 		];
 	}
 
@@ -79,6 +80,7 @@ class LuhnAlgorithmTest extends TestCase {
 		return [
 			[12345, 5],
 			[410321920, 2],
+			[3199723370002, 0],
 		];
 	}
 }
