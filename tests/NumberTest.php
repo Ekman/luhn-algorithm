@@ -45,4 +45,19 @@ class NumberTest extends TestCase
             [4103219202, new Number(410321920, 2)]
         ];
     }
+
+    /**
+     * @dataProvider provideToString_success
+     */
+    public function testToString_success($number, $expected)
+    {
+        $this->assertEquals($expected, (string) $number);
+    }
+
+    public function provideToString_success()
+    {
+        return [
+            [new Number(12345, 5), "123455"]
+        ];
+    }
 }
