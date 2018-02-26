@@ -23,40 +23,26 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Nekman\LuhnAlgorithm\Contract;
+namespace Nekman\LuhnAlgorithm\Test;
 
-/**
- * Handles the Luhn Algorithm.
- * 
- * @link http://en.wikipedia.org/wiki/Luhn_algorithm 
- */
-interface LuhnAlgorithmInterface {
-    /**
-     * Determine if a number is valid according to the Luhn Algorithm.
-     *
-     * @param NumberInterface $number The number to validate.
-     *
-     * @return bool true if number is valid, false otherwise.
-     */
-    public function isValid(NumberInterface $number): bool;
+use Nekman\LuhnAlgorithm\Number;
+use PHPUnit\Framework\TestCase;
 
+class NumberTest extends TestCase
+{
     /**
-     * Calculate the check digit for an input.
-     *
-     * @param NumberInterface $number The number, without check digit, to calculate the check digit for.
-     *
-     * @return int The check digit.
-     *
+     * @dataProvider provideWithCheckDigit_success
      */
-    public function calcCheckDigit(NumberInterface $number): int;
+    public function testWithCheckDigit_success($number, $expected)
+    {
+        $this->assertEquals($expected, Number::fromString($number));
+    }
 
-    /**
-     * Calulates the checksum for number.
-     *
-     * @param NumberInterface $number The number, without check digit, to calculate the checksum for.
-     *
-     * @return int The checksum.
-     *
-     */
-    public function calcChecksum(NumberInterface $number): int;
+    public function provideWithCheckDigit_success()
+    {
+        return [
+            ["410321-9202", new Number(410321920, 2)],
+            [4103219202, new Number(410321920, 2)]
+        ];
+    }
 }

@@ -26,37 +26,21 @@
 namespace Nekman\LuhnAlgorithm\Contract;
 
 /**
- * Handles the Luhn Algorithm.
- * 
- * @link http://en.wikipedia.org/wiki/Luhn_algorithm 
+ * Describes the structure of a number in the Luhn Algorithm.
  */
-interface LuhnAlgorithmInterface {
+interface NumberInterface
+{
     /**
-     * Determine if a number is valid according to the Luhn Algorithm.
+     * Get the number, without check digit.
      *
-     * @param NumberInterface $number The number to validate.
-     *
-     * @return bool true if number is valid, false otherwise.
+     * @return int
      */
-    public function isValid(NumberInterface $number): bool;
+    public function getNumber(): int;
 
     /**
-     * Calculate the check digit for an input.
+     * Get the check digit for the number.
      *
-     * @param NumberInterface $number The number, without check digit, to calculate the check digit for.
-     *
-     * @return int The check digit.
-     *
+     * @return int|null The check digit or null if it has not been calculated yet.
      */
-    public function calcCheckDigit(NumberInterface $number): int;
-
-    /**
-     * Calulates the checksum for number.
-     *
-     * @param NumberInterface $number The number, without check digit, to calculate the checksum for.
-     *
-     * @return int The checksum.
-     *
-     */
-    public function calcChecksum(NumberInterface $number): int;
+    public function getCheckDigit(): ?int;
 }

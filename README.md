@@ -20,14 +20,21 @@ Use the class like this:
 
 ```php
 use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
+use Nekman\LuhnAlgorithm\Number;
 
 $luhn = LuhnAlgorithmFactory::create();
 
-if ($luhn->isValid(123456789)) {
-	// Number is valid.
+// Validate a credit card number entered in a form.
+$ccNumber = Number::fromString($creditCard);
+if ($luhn->isValid($ccNumber)) {
+	// Credit card number is valid.
 }
 
-$checkSum = $luhn->calcChecksum(123456789);
+// These methods are used internally by the library. You're free
+// to make use of them as well.
+$number = new Number(12345);
 
-$checkDigit = $luhn->calcCheckDigit(123456789);
+$checksum = $luhn->calcChecksum($number);
+
+$checkDigit = $luhn->calcCheckDigit($number);
 ```

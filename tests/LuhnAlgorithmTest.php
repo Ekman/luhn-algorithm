@@ -25,6 +25,7 @@
 
 namespace Nekman\LuhnAlgorithm\Test;
 
+use Nekman\LuhnAlgorithm\Number;
 use PHPUnit\Framework\TestCase;
 use Nekman\LuhnAlgorithm\LuhnAlgorithm;
 
@@ -49,10 +50,9 @@ class LuhnAlgorithmTest extends TestCase {
 
 	public function provideIsValid_success() {
 		return [
-			["410321-9202", true],
-			[123455, true],
-			[4103219202, true],
-			[31997233700020, true],
+			[new Number(12345, 5), true],
+			[new Number(410321920, 2), true],
+			[new Number(3199723370002, 0), true],
 		];
 	}
 
@@ -65,7 +65,7 @@ class LuhnAlgorithmTest extends TestCase {
 
 	public function provideCalcChecksum_success() {
 		return [
-			[3199723370002, 50],
+			[new Number(3199723370002), 50],
 		];
 	}
 
@@ -78,9 +78,9 @@ class LuhnAlgorithmTest extends TestCase {
 
 	public function provideCalcCheckDigit_success() {
 		return [
-			[12345, 5],
-			[410321920, 2],
-			[3199723370002, 0],
+			[new Number(12345), 5],
+			[new Number(410321920), 2],
+			[new Number(3199723370002), 0],
 		];
 	}
 }
