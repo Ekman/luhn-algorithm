@@ -23,27 +23,41 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Nekman\LuhnAlgorithm;
+namespace Nekman\LuhnAlgorithm\Test;
 
-use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
+use Nekman\LuhnAlgorithm\Number;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Factory for creating implementations of the Luhn Algorithm.
- */
-class LuhnAlgorithmFactory
+class NumberTest extends TestCase
 {
-    private function __construct()
+    /**
+     * @dataProvider provideWithCheckDigit_success
+     */
+    public function testWithCheckDigit_success($number, $expected)
     {
-        // Only static methods.
+        $this->assertEquals($expected, Number::fromString($number));
+    }
+
+    public function provideWithCheckDigit_success()
+    {
+        return [
+            ["410321-9202", new Number(410321920, 2)],
+            [4103219202, new Number(410321920, 2)]
+        ];
     }
 
     /**
-     * Create a new instance of an implementation of the Luhn Algorithm.
-     *
-     * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
+     * @dataProvider provideToString_success
      */
-    public static function create(): LuhnAlgorithmInterface
+    public function testToString_success($number, $expected)
     {
-        return new LuhnAlgorithm();
+        $this->assertEquals($expected, (string) $number);
+    }
+
+    public function provideToString_success()
+    {
+        return [
+            [new Number(12345, 5), "123455"]
+        ];
     }
 }

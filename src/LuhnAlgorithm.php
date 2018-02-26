@@ -26,68 +26,71 @@
 namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
+use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 
 /**
- * Handles the Luhn Algorithm.
- * 
- * @link http://en.wikipedia.org/wiki/Luhn_algorithm 
+ * {@inheritdoc}
  */
-class LuhnAlgorithm implements LuhnAlgorithmInterface {
-	/**
-	 * {@inheritDoc}
-	 */
-	public function isValid(string $input): bool {
-		// Remove everything except digits from the input.
-		$number = (int) preg_replace("/[^\d]/", "", $input);
-		
-		$checksum = $this->calcChecksum($number);
+class LuhnAlgorithm implements LuhnAlgorithmInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function isValid(NumberInterface $number): bool
+    {
+        if ($number->getCheckDigit() === null) {
+            throw new \InvalidArgumentException("Check digit cannot be null.");
+        }
 
-		// If the checksum  is divisible by 10 it is valid
-		return ($checksum % 10) === 0;
-	}
+        $checksum = $this->calcChecksum($number);
+        $sum = $checksum + $number->getCheckDigit();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function calcCheckDigit(int $input): int {
-		$checkSum = (string) $this->calcChecksum($input . 0);
-		
-		// Get the last digit of the checksum
-		$checkDigit = (int) $checkSum[strlen($checkSum) - 1];
+        // If the checksum is divisible by 10 it is valid.
+        return ($sum % 10) === 0;
+    }
 
-		// If the checkdigit is not 0, then subtract the  value from 10
-		return $checkDigit === 0 ? $checkDigit : 10 - $checkDigit;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function calcCheckDigit(NumberInterface $number): int
+    {
+        $checksum = $this->calcChecksum($number);
+        
+        // Get the last digit of the checksum.
+        $checkDigit = $checksum % 10;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function calcChecksum(int $input): int {
-		$input = (string) $input;
-		$length = strlen($input);
+        // If the check digit is not 0, then subtract the value from 10.
+        return $checkDigit === 0
+            ? $checkDigit
+            : 10 - $checkDigit;
+    }
 
-		$checkSum = 0;
+    /**
+     * {@inheritDoc}
+     */
+    public function calcChecksum(NumberInterface $number): int
+    {
+        $number = (string) $number->getNumber();
+        $nDigits = strlen($number);
+        $checksum = 0;
+        $parity = $nDigits % 2;
 
-		// Start at the next last digit
-		for ($i = $length - 2; $i >= 0; $i -= 2) {
-			// Multiply number with 2
-			$tmp = (int) ($input[$i]) * 2;
+        for ($i = 0; $i < $nDigits; $i++) {
+            $digit = (int) $number[$i];
 
-			// If a 2 digit number, split and add togheter
-			if ($tmp > 9) {
-				$tmp = ($tmp / 10) + ($tmp % 10);
-			}
+            // Every other digit, starting from the leftmost,
+            // shall be doubled.
+            if (($i % 2) !== $parity) {
+                $digit *= 2;
 
-			// Sum it upp
-			$checkSum += $tmp;
-		}
+                if ($digit > 9) {
+                    $digit -= 9;
+                }
+            }
 
-		// Start at the next last digit
-		for ($i = $length - 1; $i >= 0; $i -= 2) {
-			// Sum it upp
-			$checkSum += (int) $input[$i];
-		}
+            $checksum += $digit;
+        }
 
-		return $checkSum;
-	}
+        return $checksum;
+    }
 }

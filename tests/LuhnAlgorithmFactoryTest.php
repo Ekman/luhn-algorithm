@@ -25,12 +25,14 @@
 
 namespace Nekman\LuhnAlgorithm\Test;
 
-use PHPUnit\Framework\TestCase;
 use Nekman\LuhnAlgorithm\LuhnAlgorithm;
 use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
+use PHPUnit\Framework\TestCase;
 
-class LuhmAlgorithmFactoryTest extends TestCase {
-    public function testCreate() {
+class LuhmAlgorithmFactoryTest extends TestCase
+{
+    public function testCreate()
+    {
         $this->assertInstanceOf(LuhnAlgorithm::class, LuhnAlgorithmFactory::create());
     }
 }

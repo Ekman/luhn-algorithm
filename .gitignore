@@ -1,5 +1,7 @@
 index.php
 nbproject/
+.idea/
+.php_cs.cache
 
 # Created by http://www.gitignore.io
 

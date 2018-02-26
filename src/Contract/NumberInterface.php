@@ -23,27 +23,24 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Nekman\LuhnAlgorithm;
-
-use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
+namespace Nekman\LuhnAlgorithm\Contract;
 
 /**
- * Factory for creating implementations of the Luhn Algorithm.
+ * Describes the structure of a number in the Luhn Algorithm.
  */
-class LuhnAlgorithmFactory
+interface NumberInterface
 {
-    private function __construct()
-    {
-        // Only static methods.
-    }
+    /**
+     * Get the number, without check digit.
+     *
+     * @return int
+     */
+    public function getNumber(): int;
 
     /**
-     * Create a new instance of an implementation of the Luhn Algorithm.
+     * Get the check digit for the number.
      *
-     * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
+     * @return int|null The check digit or null if it has not been calculated yet.
      */
-    public static function create(): LuhnAlgorithmInterface
-    {
-        return new LuhnAlgorithm();
-    }
+    public function getCheckDigit(): ?int;
 }
