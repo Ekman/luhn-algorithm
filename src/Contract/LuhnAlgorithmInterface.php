@@ -34,33 +34,33 @@ interface LuhnAlgorithmInterface {
     /**
      * Determine if a number is valid according to the Luhn Algorithm.
      * 
-     * @param string $input The number to validate.
+     * @param string $number The number to validate.
      * 
      * @return bool true if number is valid, false otherwise.
      * 
      * @throws \InvalidArgumentException If the input is invalid.
      */
-    public function isValid(string $input): bool;
+    public function isValid(string $number): bool;
 
     /**
      * Calculate the check digit for an input.
      * 
-     * @param int $input The input to calculate the check digit for.
+     * @param int $numberWithoutCheckDigit The number, without check digit, to calculate the check digit for.
      * 
      * @return int The check digit.
      * 
      * @throws \InvalidArgumentException If the input is invalid.
      */
-    public function calcCheckDigit(int $input): int;
+    public function calcCheckDigit(int $numberWithoutCheckDigit): int;
 
     /**
      * Calulates the checksum for number.
      * 
-     * @param int $input The number to calculate the checksum for.
+     * @param int $numberWithoutCheckDigit The number, without check digit, to calculate the checksum for.
      * 
      * @return int The checksum.
      * 
      * @throws \InvalidArgumentException If the input is invalid.
      */
-    public function calcChecksum(int $input): int;
+    public function calcChecksum(int $numberWithoutCheckDigit): int;
 }

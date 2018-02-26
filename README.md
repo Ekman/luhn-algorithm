@@ -3,12 +3,13 @@
 [![Build Status](https://travis-ci.org/Ekman/Luhn-Algorithm.svg?branch=master)](https://travis-ci.org/Ekman/Luhn-Algorithm)
 
 This is an implementation of the Luhn Algorithm in PHP. The Luhn Algorithm is
-used to validate things like credit cards and national identifcation numbers.
-More information on the algorithm can be found at [Wikipedia](http://en.wikipedia.org/wiki/Luhn_algorithm)
+used to validate things like credit cards and national identification numbers.
+More information on the algorithm can be found at [Wikipedia](http://en.wikipedia.org/wiki/Luhn_algorithm).
 
 ## Installation
 
-Can be installed using composer:
+Install with [Composer](https://getcomposer.org/):
+
 ```bash
 composer require nekman/luhn-algorithm
 ```
@@ -26,15 +27,7 @@ if ($luhn->isValid(123456789)) {
 	// Number is valid.
 }
 
-$checkSum = $luhn->calcCheckSum(123456789);
+$checkSum = $luhn->calcChecksum(123456789);
 
 $checkDigit = $luhn->calcCheckDigit(123456789);
 ```
-
-## Changelog
-
-* 4.0.0 - Rewrite of the implementation.
-* 3.0.0 - Completely restructured the interface of the library. 
-* 2.0.1 - Fixed typos in interface.
-* 2.0.0 - Added namespace.
-* 1.0.0 - Initial release.

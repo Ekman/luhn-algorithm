@@ -32,25 +32,25 @@ class LuhnAlgorithmTest extends TestCase {
 	/**
 	 * @var LuhnAlgorithm
 	 */
-	private $object;
+	private $luhn;
 
 	public function setUp() {
 		parent::setUp();
 		
-		$this->object = new LuhnAlgorithm();
+		$this->luhn = new LuhnAlgorithm();
 	}
 
 	/**
 	 * @dataProvider provideIsValid_success
 	 */
 	public function testIsValid_success($number, $expected) {
-		$this->assertEquals($expected, $this->object->isValid($number));
+		$this->assertEquals($expected, $this->luhn->isValid($number));
 	}
 
 	public function provideIsValid_success() {
 		return [
 			["410321-9202", true],
-			["410321 - 9202", true],
+			[123455, true],
 			[4103219202, true],
 			[31997233700020, true],
 		];
@@ -60,12 +60,12 @@ class LuhnAlgorithmTest extends TestCase {
 	 * @dataProvider provideCalcChecksum_success
 	 */
 	public function testCalcChecksum_success($number, $expected) {
-		$this->assertEquals($expected, $this->object->calcChecksum($number));
+		$this->assertEquals($expected, $this->luhn->calcChecksum($number));
 	}
 
 	public function provideCalcChecksum_success() {
 		return [
-			[4103219202, 30],
+			[3199723370002, 50],
 		];
 	}
 
@@ -73,7 +73,7 @@ class LuhnAlgorithmTest extends TestCase {
 	 * @dataProvider provideCalcCheckDigit_success
 	 */
 	public function testCalcCheckDigit_success($number, $expected) {
-		$this->assertEquals($expected, $this->object->calcCheckDigit($number));
+		$this->assertEquals($expected, $this->luhn->calcCheckDigit($number));
 	}
 
 	public function provideCalcCheckDigit_success() {

@@ -26,7 +26,6 @@
 namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
-use Nekman\LuhnAlgorithm\LuhmAlgorithm;
 
 /**
  * Factory for creating implementations of the Luhn Algorithm.
