@@ -27,10 +27,11 @@ namespace Nekman\LuhnAlgorithm\Contract;
 
 /**
  * Handles the Luhn Algorithm.
- * 
- * @link http://en.wikipedia.org/wiki/Luhn_algorithm 
+ *
+ * @link http://en.wikipedia.org/wiki/Luhn_algorithm
  */
-interface LuhnAlgorithmInterface {
+interface LuhnAlgorithmInterface
+{
     /**
      * Determine if a number is valid according to the Luhn Algorithm.
      *
@@ -43,7 +44,7 @@ interface LuhnAlgorithmInterface {
     /**
      * Calculate the check digit for an input.
      *
-     * @param NumberInterface $number The number, without check digit, to calculate the check digit for.
+     * @param NumberInterface $number The number to calculate the check digit for.
      *
      * @return int The check digit.
      *
@@ -53,7 +54,7 @@ interface LuhnAlgorithmInterface {
     /**
      * Calulates the checksum for number.
      *
-     * @param NumberInterface $number The number, without check digit, to calculate the checksum for.
+     * @param NumberInterface $number The number to calculate the checksum for.
      *
      * @return int The checksum.
      *

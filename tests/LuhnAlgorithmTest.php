@@ -25,62 +25,70 @@
 
 namespace Nekman\LuhnAlgorithm\Test;
 
+use Nekman\LuhnAlgorithm\LuhnAlgorithm;
 use Nekman\LuhnAlgorithm\Number;
 use PHPUnit\Framework\TestCase;
-use Nekman\LuhnAlgorithm\LuhnAlgorithm;
 
-class LuhnAlgorithmTest extends TestCase {
-	/**
-	 * @var LuhnAlgorithm
-	 */
-	private $luhn;
+class LuhnAlgorithmTest extends TestCase
+{
+    /**
+     * @var LuhnAlgorithm
+     */
+    private $luhn;
 
-	public function setUp() {
-		parent::setUp();
-		
-		$this->luhn = new LuhnAlgorithm();
-	}
+    public function setUp()
+    {
+        parent::setUp();
+        
+        $this->luhn = new LuhnAlgorithm();
+    }
 
-	/**
-	 * @dataProvider provideIsValid_success
-	 */
-	public function testIsValid_success($number, $expected) {
-		$this->assertEquals($expected, $this->luhn->isValid($number));
-	}
+    /**
+     * @dataProvider provideIsValid_success
+     */
+    public function testIsValid_success($number, $expected)
+    {
+        $this->assertEquals($expected, $this->luhn->isValid($number));
+    }
 
-	public function provideIsValid_success() {
-		return [
-			[new Number(12345, 5), true],
-			[new Number(410321920, 2), true],
-			[new Number(3199723370002, 0), true],
-		];
-	}
+    public function provideIsValid_success()
+    {
+        return [
+            [new Number(12345, 5), true],
+            [new Number(410321920, 2), true],
+            [new Number(3199723370002, 0), true],
+        ];
+    }
 
-	/**
-	 * @dataProvider provideCalcChecksum_success
-	 */
-	public function testCalcChecksum_success($number, $expected) {
-		$this->assertEquals($expected, $this->luhn->calcChecksum($number));
-	}
+    /**
+     * @dataProvider provideCalcChecksum_success
+     */
+    public function testCalcChecksum_success($number, $expected)
+    {
+        $this->assertEquals($expected, $this->luhn->calcChecksum($number));
+    }
 
-	public function provideCalcChecksum_success() {
-		return [
-			[new Number(3199723370002), 50],
-		];
-	}
+    public function provideCalcChecksum_success()
+    {
+        return [
+            [new Number(3199723370002), 50],
+        ];
+    }
 
-	/**
-	 * @dataProvider provideCalcCheckDigit_success
-	 */
-	public function testCalcCheckDigit_success($number, $expected) {
-		$this->assertEquals($expected, $this->luhn->calcCheckDigit($number));
-	}
+    /**
+     * @dataProvider provideCalcCheckDigit_success
+     */
+    public function testCalcCheckDigit_success($number, $expected)
+    {
+        $this->assertEquals($expected, $this->luhn->calcCheckDigit($number));
+    }
 
-	public function provideCalcCheckDigit_success() {
-		return [
-			[new Number(12345), 5],
-			[new Number(410321920), 2],
-			[new Number(3199723370002), 0],
-		];
-	}
+    public function provideCalcCheckDigit_success()
+    {
+        return [
+            [new Number(12345), 5],
+            [new Number(410321920), 2],
+            [new Number(3199723370002), 0],
+        ];
+    }
 }

@@ -32,16 +32,18 @@ use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
  */
 class LuhnAlgorithmFactory
 {
-    private function __construct() {
+    private function __construct()
+    {
         // Only static methods.
     }
 
     /**
      * Create a new instance of an implementation of the Luhn Algorithm.
-     * 
+     *
      * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
      */
-    public static function create(): LuhnAlgorithmInterface {
+    public static function create(): LuhnAlgorithmInterface
+    {
         return new LuhnAlgorithm();
     }
 }

@@ -31,53 +31,57 @@ use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 /**
  * {@inheritdoc}
  */
-class LuhnAlgorithm implements LuhnAlgorithmInterface {
-	/**
-	 * {@inheritDoc}
-	 */
-	public function isValid(NumberInterface $number): bool {
-		if ($number->getCheckDigit() === null) {
-		    throw new \InvalidArgumentException("Check digit cannot be null.");
+class LuhnAlgorithm implements LuhnAlgorithmInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function isValid(NumberInterface $number): bool
+    {
+        if ($number->getCheckDigit() === null) {
+            throw new \InvalidArgumentException("Check digit cannot be null.");
         }
 
         $checksum = $this->calcChecksum($number);
-		$sum = $checksum + $number->getCheckDigit();
+        $sum = $checksum + $number->getCheckDigit();
 
-		// If the checksum is divisible by 10 it is valid.
-		return ($sum % 10) === 0;
-	}
+        // If the checksum is divisible by 10 it is valid.
+        return ($sum % 10) === 0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function calcCheckDigit(NumberInterface $number): int {
-		$checksum = $this->calcChecksum($number);
-		
-		// Get the last digit of the checksum.
-		$checkDigit = $checksum % 10;
+    /**
+     * {@inheritDoc}
+     */
+    public function calcCheckDigit(NumberInterface $number): int
+    {
+        $checksum = $this->calcChecksum($number);
+        
+        // Get the last digit of the checksum.
+        $checkDigit = $checksum % 10;
 
-		// If the check digit is not 0, then subtract the value from 10.
-		return $checkDigit === 0
+        // If the check digit is not 0, then subtract the value from 10.
+        return $checkDigit === 0
             ? $checkDigit
             : 10 - $checkDigit;
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function calcChecksum(NumberInterface $number): int {
-		$number = (string) $number->getNumber();
-		$nDigits = strlen($number);
-		$checksum = 0;
-		$parity = $nDigits % 2;
+    /**
+     * {@inheritDoc}
+     */
+    public function calcChecksum(NumberInterface $number): int
+    {
+        $number = (string) $number->getNumber();
+        $nDigits = strlen($number);
+        $checksum = 0;
+        $parity = $nDigits % 2;
 
-		for ($i = 0; $i < $nDigits; $i++) {
-		    $digit = (int) $number[$i];
+        for ($i = 0; $i < $nDigits; $i++) {
+            $digit = (int) $number[$i];
 
-		    // Every other digit, starting from the leftmost,
+            // Every other digit, starting from the leftmost,
             // shall be doubled.
-		    if (($i % 2) !== $parity) {
-		        $digit *= 2;
+            if (($i % 2) !== $parity) {
+                $digit *= 2;
 
                 if ($digit > 9) {
                     $digit -= 9;
@@ -87,6 +91,6 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface {
             $checksum += $digit;
         }
 
-		return $checksum;
-	}
+        return $checksum;
+    }
 }
