@@ -61,6 +61,22 @@ class LuhnAlgorithmTest extends TestCase
     }
 
     /**
+     * @dataProvider provideIsValid_failure
+     */
+    public function testIsValid_failure($number, $exception)
+    {
+        $this->expectException($exception);
+        $this->luhn->isValid($number);
+    }
+
+    public function provideIsValid_failure()
+    {
+        return [
+            [new Number(123, null), \InvalidArgumentException::class],
+        ];
+    }
+
+    /**
      * @dataProvider provideCalcChecksum_success
      */
     public function testCalcChecksum_success($number, $expected)
