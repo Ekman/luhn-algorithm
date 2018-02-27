@@ -1,6 +1,16 @@
 language: php
+
 php:
   - '7.1'
   - '7.2'
-before_script: composer install
+
+install: composer install --no-interaction --classmap-authoritative
+
 script: vendor/bin/phpunit
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - $HOME/.composer
