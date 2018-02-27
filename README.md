@@ -16,22 +16,36 @@ composer require nekman/luhn-algorithm
 
 ## Usage
 
-Use the class like this:
+In order to instantiate a new instance of the library, use the factory:
+ 
+ ```php
+ use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
+ 
+ $luhn = LuhnAlgorithmFactory::create();
+ ```
 
+You can find [the public interface of the library in the `LuhnAlgorithmInterface`](src/Contract/LuhnAlgorithmInterface.php).
+
+[The `Number` class](src/Number.php) is a container class that holds the actual number and the check digit. It does no validation
+nor does it calculate the check digit. To simplify the process of validating a number you can use the
+named constructor `Number::fromString()` like this:
+ 
 ```php
-use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
 use Nekman\LuhnAlgorithm\Number;
 
-$luhn = LuhnAlgorithmFactory::create();
+// Assume $creditCard is from a form.
+$number = Number::fromString($creditCard);
 
-// Validate a credit card number entered in a form.
-$ccNumber = Number::fromString($creditCard);
-if ($luhn->isValid($ccNumber)) {
-	// Credit card number is valid.
+if ($luhn->isValid($number)) {
+    // Number is valid.
 }
+```
 
-// These methods are used internally by the library. You're free
-// to make use of them as well.
+Alternatively, if you want to calculate the checksum or check digit for a number:
+
+```php
+use Nekman\LuhnAlgorithm\Number;
+
 $number = new Number(12345);
 
 $checksum = $luhn->calcChecksum($number);
