@@ -51,6 +51,10 @@ class Number implements NumberInterface
      */
     public function __construct(string $number, ?int $checkDigit = null)
     {
+        if (!is_numeric($number)) {
+            throw new \InvalidArgumentException("Expects \$number to be a number, \"{$number}\" given.");
+        }
+
         $this->number = $number;
         $this->checkDigit = $checkDigit;
     }
@@ -68,7 +72,7 @@ class Number implements NumberInterface
         $input = preg_replace('/[^\d]/', '', $input);
 
         if (!is_numeric($input)) {
-            throw new \InvalidArgumentException("Expects input to be a number, \"{$input}\" given.");
+            throw new \InvalidArgumentException("Expects \$input to be a number, \"{$input}\" given.");
         }
 
         // Get the last digit.

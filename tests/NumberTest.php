@@ -44,6 +44,24 @@ class NumberTest extends TestCase
             ["410321-9202", new Number(410321920, 2)],
             [4103219202, new Number(410321920, 2)],
             ['89148000003974165685', new Number(8914800000397416568, 5)],
+            ['abc123', new Number(12, 3)],
+        ];
+    }
+
+    /**
+     * @dataProvider provideFromString_fail
+     */
+    public function testFromString_fail($number, $checkDigit, $expected)
+    {
+        $this->expectException($expected);
+        new Number($number, $checkDigit);
+    }
+
+    public function provideFromString_fail()
+    {
+        return [
+            ['', 1, \InvalidArgumentException::class],
+            ['xyz ', null, \InvalidArgumentException::class],
         ];
     }
 
@@ -71,5 +89,22 @@ class NumberTest extends TestCase
 
         $this->assertEquals($largeNumber, $number->getNumber());
         $this->assertEquals($checkDigit, $number->getCheckDigit());
+    }
+
+    /**
+     * @dataProvider provideNew_fail
+     */
+    public function testNew_fail($number, $checkDigit, $expected)
+    {
+        $this->expectException($expected);
+        new Number($number, $checkDigit);
+    }
+
+    public function provideNew_fail()
+    {
+        return [
+            ['abc123', 1, \InvalidArgumentException::class],
+            ['123 ', null, \InvalidArgumentException::class],
+        ];
     }
 }
