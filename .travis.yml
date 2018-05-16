@@ -6,7 +6,7 @@ php:
 
 install: composer install --no-interaction --classmap-authoritative
 
-script: vendor/bin/phpunit
+script: vendor/bin/phpunit --configuration phpunit.xml
 
 notifications:
   email: false
