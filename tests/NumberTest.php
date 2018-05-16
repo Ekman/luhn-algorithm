@@ -41,10 +41,12 @@ class NumberTest extends TestCase
     public function provideFromString_success()
     {
         return [
-            ["410321-9202", new Number(410321920, 2)],
-            [4103219202, new Number(410321920, 2)],
-            ['89148000003974165685', new Number(8914800000397416568, 5)],
-            ['abc123', new Number(12, 3)],
+            ["410321-9202", new Number('410321920', 2)],
+            [4103219202, new Number('410321920', 2)],
+            ['89148000003974165685', new Number('8914800000397416568', 5)],
+            ['abc123', new Number('12', 3)],
+            // Use any number that is larger then PHP_INT_MAX.
+            [((string) PHP_INT_MAX).'21', new Number(((string) PHP_INT_MAX).'2', 1)],
         ];
     }
 
@@ -78,17 +80,6 @@ class NumberTest extends TestCase
         return [
             [new Number(12345, 5), "123455"]
         ];
-    }
-
-    public function testIntMax()
-    {
-        // Use any number that is larger then PHP_INT_MAX.
-        $largeNumber = ((string) PHP_INT_MAX).'2';
-        $checkDigit = 1;
-        $number = Number::fromString($largeNumber.$checkDigit);
-
-        $this->assertEquals($largeNumber, $number->getNumber());
-        $this->assertEquals($checkDigit, $number->getCheckDigit());
     }
 
     /**
