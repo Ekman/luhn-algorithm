@@ -31,18 +31,39 @@ use PHPUnit\Framework\TestCase;
 class NumberTest extends TestCase
 {
     /**
-     * @dataProvider provideWithCheckDigit_success
+     * @dataProvider provideFromString_success
      */
-    public function testWithCheckDigit_success($number, $expected)
+    public function testFromString_success($number, $expected)
     {
         $this->assertEquals($expected, Number::fromString($number));
     }
 
-    public function provideWithCheckDigit_success()
+    public function provideFromString_success()
     {
         return [
-            ["410321-9202", new Number(410321920, 2)],
-            [4103219202, new Number(410321920, 2)]
+            ["410321-9202", new Number('410321920', 2)],
+            [4103219202, new Number('410321920', 2)],
+            ['89148000003974165685', new Number('8914800000397416568', 5)],
+            ['abc123', new Number('12', 3)],
+            // Use any number that is larger then PHP_INT_MAX.
+            [((string) PHP_INT_MAX).'21', new Number(((string) PHP_INT_MAX).'2', 1)],
+        ];
+    }
+
+    /**
+     * @dataProvider provideFromString_fail
+     */
+    public function testFromString_fail($number, $checkDigit, $expected)
+    {
+        $this->expectException($expected);
+        new Number($number, $checkDigit);
+    }
+
+    public function provideFromString_fail()
+    {
+        return [
+            ['', 1, \InvalidArgumentException::class],
+            ['xyz ', null, \InvalidArgumentException::class],
         ];
     }
 
@@ -58,6 +79,23 @@ class NumberTest extends TestCase
     {
         return [
             [new Number(12345, 5), "123455"]
+        ];
+    }
+
+    /**
+     * @dataProvider provideNew_fail
+     */
+    public function testNew_fail($number, $checkDigit, $expected)
+    {
+        $this->expectException($expected);
+        new Number($number, $checkDigit);
+    }
+
+    public function provideNew_fail()
+    {
+        return [
+            ['abc123', 1, \InvalidArgumentException::class],
+            ['123 ', null, \InvalidArgumentException::class],
         ];
     }
 }

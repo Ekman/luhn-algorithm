@@ -35,9 +35,9 @@ interface NumberInterface
     /**
      * Get the number, without check digit.
      *
-     * @return int
+     * @return string
      */
-    public function getNumber(): int;
+    public function getNumber(): string;
 
     /**
      * Get the check digit for the number.

@@ -46,11 +46,15 @@ class Number implements NumberInterface
 
     /**
      * Input constructor.
-     * @param int $number The number.
+     * @param string $number The number.
      * @param int|null $checkDigit [Optional] The check digit for the number.
      */
-    public function __construct(int $number, ?int $checkDigit = null)
+    public function __construct(string $number, ?int $checkDigit = null)
     {
+        if (!is_numeric($number)) {
+            throw new \InvalidArgumentException("Expects \$number to be a number, \"{$number}\" given.");
+        }
+
         $this->number = $number;
         $this->checkDigit = $checkDigit;
     }
@@ -65,13 +69,17 @@ class Number implements NumberInterface
      */
     public static function fromString(string $input): self
     {
-        $input = (int) preg_replace("/[^\d]/", "", $input);
+        $input = preg_replace('/[^\d]/', '', $input);
+
+        if (!is_numeric($input)) {
+            throw new \InvalidArgumentException("Expects \$input to be a number, \"{$input}\" given.");
+        }
 
         // Get the last digit.
-        $checkDigit = $input % 10;
+        $checkDigit = (int) $input[strlen($input) - 1];
 
         // Remove the last digit.
-        $number = (int) ($input / 10);
+        $number = substr($input, 0, strlen($input) - 1);
 
         return new self($number, $checkDigit);
     }
@@ -79,7 +87,7 @@ class Number implements NumberInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumber(): int
+    public function getNumber(): string
     {
         return $this->number;
     }
