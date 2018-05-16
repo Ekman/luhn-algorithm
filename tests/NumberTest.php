@@ -31,14 +31,14 @@ use PHPUnit\Framework\TestCase;
 class NumberTest extends TestCase
 {
     /**
-     * @dataProvider provideWithCheckDigit_success
+     * @dataProvider provideFromString_success
      */
-    public function testWithCheckDigit_success($number, $expected)
+    public function testFromString_success($number, $expected)
     {
         $this->assertEquals($expected, Number::fromString($number));
     }
 
-    public function provideWithCheckDigit_success()
+    public function provideFromString_success()
     {
         return [
             ["410321-9202", new Number(410321920, 2)],
@@ -60,5 +60,16 @@ class NumberTest extends TestCase
         return [
             [new Number(12345, 5), "123455"]
         ];
+    }
+
+    public function testIntMax()
+    {
+        // Use any number that is larger then PHP_INT_MAX.
+        $largeNumber = ((string) PHP_INT_MAX).'2';
+        $checkDigit = 1;
+        $number = Number::fromString($largeNumber.$checkDigit);
+
+        $this->assertEquals($largeNumber, $number->getNumber());
+        $this->assertEquals($checkDigit, $number->getCheckDigit());
     }
 }
