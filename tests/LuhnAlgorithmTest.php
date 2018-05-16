@@ -57,6 +57,7 @@ class LuhnAlgorithmTest extends TestCase
             [new Number(12345, 5), true],
             [new Number(410321920, 2), true],
             [new Number(3199723370002, 0), true],
+            [new Number(8914800000397416568, 5), true],
         ];
     }
 

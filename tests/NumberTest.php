@@ -42,7 +42,8 @@ class NumberTest extends TestCase
     {
         return [
             ["410321-9202", new Number(410321920, 2)],
-            [4103219202, new Number(410321920, 2)]
+            [4103219202, new Number(410321920, 2)],
+            ['89148000003974165685', new Number(8914800000397416568, 5)],
         ];
     }
 
