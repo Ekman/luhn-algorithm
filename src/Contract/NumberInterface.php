@@ -35,7 +35,7 @@ interface NumberInterface
     /**
      * Get the number, without check digit.
      *
-     * @return stringKomplettera med ett arbetsgivarintyg där garanterad grundlön framgår (vi tillgodoräknar inte inkomst från provision, bonus eller Ob-tillägg) samt att det är en tillsvidareanställning. Bifoga även de tre senaste lönespecifikationerna. Intyget får inte vara äldre än 6 månader och ska vara undertecknat av arbetsgivaren.
+     * @return string
      */
     public function getNumber(): string;
 
