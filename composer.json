@@ -4,6 +4,7 @@
 	"description": "Implementation of the Luhn algorithm in PHP. Used in validation of credit card numbers and some national identification numbers.",
 	"prefer-stable": true,
 	"prefer-lowest": true,
+	"minimum-stability": "stable",
 	"keywords": [
 		"luhn",
 		"credit",
