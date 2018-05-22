@@ -98,4 +98,22 @@ class NumberTest extends TestCase
             ['123 ', null, \InvalidArgumentException::class],
         ];
     }
+
+    /**
+     * @dataProvider provideProperties
+     */
+    public function testProperties($input, $checkDigit)
+    {
+        $number = new Number($input, $checkDigit);
+        $this->assertEquals($input, $number->getNumber());
+        $this->assertEquals($checkDigit, $number->getCheckDigit());
+    }
+
+    public function provideProperties()
+    {
+        return [
+            [123, 1],
+            [123, null],
+        ];
+    }
 }

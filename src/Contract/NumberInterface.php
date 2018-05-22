@@ -44,5 +44,5 @@ interface NumberInterface
      *
      * @return int|null The check digit or null if it has not been calculated yet.
      */
-    public function getCheckDigit(): ?int;
+    public function getCheckDigit();
 }

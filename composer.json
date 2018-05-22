@@ -2,6 +2,9 @@
 	"name": "nekman/luhn-algorithm",
 	"type": "library",
 	"description": "Implementation of the Luhn algorithm in PHP. Used in validation of credit card numbers and some national identification numbers.",
+	"prefer-stable": true,
+	"prefer-lowest": true,
+	"minimum-stability": "stable",
 	"keywords": [
 		"luhn",
 		"credit",
@@ -31,10 +34,10 @@
 		}
 	},
 	"require": {
-		"php": "^7.1"
+		"php": "^7.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^6.5",
-		"friendsofphp/php-cs-fixer": "^2.10"
+		"phpunit/phpunit": "^6.0",
+		"friendsofphp/php-cs-fixer": "^2.0"
 	}
 }
