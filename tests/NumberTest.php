@@ -102,18 +102,18 @@ class NumberTest extends TestCase
     /**
      * @dataProvider provideProperties
      */
-    public function testProperties($input, $checkDigit, $expected)
+    public function testProperties($input, $checkDigit)
     {
         $number = new Number($input, $checkDigit);
-        $this->assertEquals($expected->getNumber(), $number->getNumber());
-        $this->assertEquals($expected->getCheckDigit(), $number->getCheckDigit());
+        $this->assertEquals($input, $number->getNumber());
+        $this->assertEquals($checkDigit, $number->getCheckDigit());
     }
 
     public function provideProperties()
     {
         return [
-            [123, 1, new Number(123, 1)],
-            [123, null, new Number(123, null)],
+            [123, 1],
+            [123, null],
         ];
     }
 }
