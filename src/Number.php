@@ -95,7 +95,7 @@ class Number implements NumberInterface
     /**
      * {@inheritdoc}
      */
-    public function getCheckDigit(): ?int
+    public function getCheckDigit()
     {
         return $this->checkDigit;
     }
