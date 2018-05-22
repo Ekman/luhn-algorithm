@@ -35,7 +35,7 @@ use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 class Number implements NumberInterface
 {
     /**
-     * @var int
+     * @var string
      */
     private $number;
 
@@ -49,7 +49,7 @@ class Number implements NumberInterface
      * @param string $number The number.
      * @param int|null $checkDigit [Optional] The check digit for the number.
      */
-    public function __construct(string $number, ?int $checkDigit = null)
+    public function __construct(string $number, int $checkDigit = null)
     {
         if (!is_numeric($number)) {
             throw new \InvalidArgumentException("Expects \$number to be a number, \"{$number}\" given.");
