@@ -38,10 +38,5 @@
 	"require-dev": {
 		"phpunit/phpunit": "^6.0",
 		"friendsofphp/php-cs-fixer": "^2.0"
-	},
-	"config": {
-		"platform": {
-			"php": "7.0"
-		}
 	}
 }
