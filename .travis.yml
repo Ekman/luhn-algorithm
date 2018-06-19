@@ -8,7 +8,7 @@ php:
 
 install: composer install --no-interaction --classmap-authoritative
 
-script: vendor/bin/phpunit --coverage-clover tests/logs/clover.xml --configuration phpunit.xml
+script: vendor/bin/phpunit --configuration phpunit.xml
 
 after_success: vendor/bin/php-coveralls -v
 
