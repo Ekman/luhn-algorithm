@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Ekman/Luhn-Algorithm.svg?branch=master)](https://travis-ci.org/Ekman/Luhn-Algorithm)
 
-This is an implementation of the Luhn Algorithm in PHP. The Luhn Algorithm is
+This is an implementation of the Luhn Algorithm for PHP and HHVM. The Luhn Algorithm is
 used to validate things like credit cards and national identification numbers.
 More information on the algorithm can be found at [Wikipedia](http://en.wikipedia.org/wiki/Luhn_algorithm).
 
