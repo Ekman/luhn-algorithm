@@ -1,6 +1,7 @@
 # Luhn Algorithm
 
 [![Build Status](https://travis-ci.org/Ekman/Luhn-Algorithm.svg?branch=master)](https://travis-ci.org/Ekman/Luhn-Algorithm)
+[![Coverage Status](https://coveralls.io/repos/github/Ekman/Luhn-Algorithm/badge.svg)](https://coveralls.io/github/Ekman/Luhn-Algorithm)
 
 This is an implementation of the Luhn Algorithm for PHP and HHVM. The Luhn Algorithm is
 used to validate things like credit cards and national identification numbers.

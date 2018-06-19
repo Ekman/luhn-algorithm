@@ -10,6 +10,8 @@ install: composer install --no-interaction --classmap-authoritative
 
 script: vendor/bin/phpunit --configuration phpunit.xml
 
+after_success: vendor/bin/php-coveralls --verbose
+
 notifications:
   email: false
 
