@@ -53,17 +53,17 @@ class NumberTest extends TestCase
     /**
      * @dataProvider provideFromString_fail
      */
-    public function testFromString_fail($number, $checkDigit, $expected)
+    public function testFromString_fail($number, $expected)
     {
         $this->expectException($expected);
-        new Number($number, $checkDigit);
+        Number::fromString($number);
     }
 
     public function provideFromString_fail()
     {
         return [
-            ['', 1, \InvalidArgumentException::class],
-            ['xyz ', null, \InvalidArgumentException::class],
+            ['', \InvalidArgumentException::class],
+            ['xyz ', \InvalidArgumentException::class],
         ];
     }
 
