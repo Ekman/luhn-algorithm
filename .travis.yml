@@ -4,11 +4,15 @@ php:
   - 7.0
   - 7.1
   - 7.2
-  - hhvm
+  - 7.3
 
-install: composer install --no-interaction --classmap-authoritative
+install:
+  - composer install --no-interaction --classmap-authoritative
+  - composer require --no-interaction php-coveralls/php-coveralls:^2.0
 
-script: vendor/bin/phpunit --configuration phpunit.xml
+script:
+  - chmod +x run-phpunit.sh
+  - ./run-phpunit.sh
 
 after_success: vendor/bin/php-coveralls --verbose
 
