@@ -6,15 +6,15 @@ php:
   - 7.2
   - 7.3
 
-install: composer install --no-interaction --classmap-authoritative
+install:
+  - composer install --no-interaction --classmap-authoritative
+  - composer require --no-interaction php-coveralls/php-coveralls:^2.0
 
 script:
   - chmod +x run-phpunit.sh
   - ./run-phpunit.sh
 
-after_success:
-  - composer require --no-interaction php-coveralls/php-coveralls:^2.0
-  - vendor/bin/php-coveralls --verbose
+after_success: vendor/bin/php-coveralls --verbose
 
 notifications:
   email: false
