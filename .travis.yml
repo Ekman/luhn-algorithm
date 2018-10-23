@@ -9,7 +9,7 @@ php:
 
 install: composer install --no-interaction --classmap-authoritative
 
-script: vendor/bin/phpunit --configuration phpunit.xml
+script: ./run-phpunit.sh
 
 after_success:
   - composer require --no-interaction php-coveralls/php-coveralls:^2.0
