@@ -5,7 +5,7 @@
 # Composer dependency.
 #
 
-if [ $TRAVIS == true ]; then
+if [ $TRAVIS ]; then
     # No need to install PHPunit
     phpunit --configuration phpunit.xml
 else
