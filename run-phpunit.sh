@@ -5,8 +5,13 @@
 # Composer dependency.
 #
 
-composer require --no-interaction phpunit/phpunit:^6.0
+if [ $TRAVIS = true ]; then
+    # No need to install PHPunit
+    phpunit --configuration phpunit.xml
+else
+    composer require --no-interaction phpunit/phpunit:^6.0
 
-vendor/bin/phpunit --configuration phpunit.xml
+    vendor/bin/phpunit --configuration phpunit.xml
 
-composer remove --no-interaction phpunit/phpunit
+    composer remove --no-interaction phpunit/phpunit
+fi;
