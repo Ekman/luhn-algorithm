@@ -45,7 +45,7 @@ class NumberTest extends TestCase
             [4103219202, new Number('410321920', 2), "Integer"],
             ['89148000003974165685', new Number('8914800000397416568', 5), "Large number"],
             ['abc123', new Number('12', 3), "Character in string"],
-            [((string) PHP_INT_MAX).'21', new Number(((string) PHP_INT_MAX).'2', 1), "Larger than INT_MAX"],
+            ['922337203685477580721', new Number('92233720368547758072', 1), "Larger than INT_MAX"],
         ];
     }
 
@@ -63,7 +63,6 @@ class NumberTest extends TestCase
         return [
             ['', \InvalidArgumentException::class, "Empty string"],
             ['xyz ', \InvalidArgumentException::class, "Invalid string"],
-            [nullm \InvalidArgumentException::class, "Null"],
         ];
     }
 
@@ -96,7 +95,6 @@ class NumberTest extends TestCase
         return [
             ['abc123', 1, \InvalidArgumentException::class, "Invalid number"],
             ['123 ', null, \InvalidArgumentException::class, "Whitespace"],
-            [null, null, \InvalidArgumentException::class, "Null"],
         ];
     }
 

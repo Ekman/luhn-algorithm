@@ -56,7 +56,7 @@ class LuhnAlgorithmTest extends TestCase
         return [
             [new Number('12345', 5), true, "Valid number"],
             [new Number('0', 0), true, "Zero"],
-            [new Number(((string) PHP_INT_MAX).'2', 1), true, "Larger than INT_MAX"],
+            [new Number('92233720368547758072', 8), true, "Larger than INT_MAX"],
             [new Number('12345', 6), false, "Invalid number"],
         ];
     }
@@ -104,7 +104,7 @@ class LuhnAlgorithmTest extends TestCase
     {
         return [
             [new Number(12345), 5, "Valid number"],
-            [new Number(5591148845), 2, "Swedish company organization ID"],
+            [new Number(559114884), 5, "Swedish company organization ID"],
         ];
     }
 }
