@@ -11,7 +11,9 @@ install: composer install --no-interaction --classmap-authoritative
 
 script: vendor/bin/phpunit --configuration phpunit.xml
 
-after_success: vendor/bin/php-coveralls --verbose
+after_success:
+  - composer require --no-interaction php-coveralls/php-coveralls:^2.0
+  - vendor/bin/php-coveralls --verbose
 
 notifications:
   email: false

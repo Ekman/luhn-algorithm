@@ -37,7 +37,6 @@
 		"php": "^7.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^6.0",
-		"php-coveralls/php-coveralls": "^2.0"
+		"phpunit/phpunit": "^6.0"
 	}
 }
