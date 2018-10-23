@@ -46,57 +46,56 @@ class LuhnAlgorithmTest extends TestCase
     /**
      * @dataProvider provideIsValid_success
      */
-    public function testIsValid_success($number, $expected)
+    public function testIsValid_success($number, $expected, $purpose)
     {
-        $this->assertEquals($expected, $this->luhn->isValid($number));
+        $this->assertEquals($expected, $this->luhn->isValid($number), $purpose);
     }
 
     public function provideIsValid_success()
     {
         return [
-            [new Number('12345', 5), true],
-            [new Number('410321920', 2), true],
-            [new Number('3199723370002', 0), true],
-            [new Number('8914800000397416568', 5), true],
-            [new Number('12345', 6), false],
+            [new Number('12345', 5), true, "Valid number"],
+            [new Number('0', 0), true, "Zero"],
+            [new Number('92233720368547758072', 8), true, "Larger than INT_MAX"],
+            [new Number('12345', 6), false, "Invalid number"],
         ];
     }
 
     /**
      * @dataProvider provideIsValid_failure
      */
-    public function testIsValid_failure($number, $exception)
+    public function testIsValid_failure($number, $exception, $purpose)
     {
-        $this->expectException($exception);
+        $this->expectException($exception, $purpose);
         $this->luhn->isValid($number);
     }
 
     public function provideIsValid_failure()
     {
         return [
-            [new Number(123, null), \InvalidArgumentException::class],
+            [new Number(123, null), \InvalidArgumentException::class, "Invalid argument"],
         ];
     }
 
     /**
      * @dataProvider provideCalcChecksum_success
      */
-    public function testCalcChecksum_success($number, $expected)
+    public function testCalcChecksum_success($number, $expected, $purpose)
     {
-        $this->assertEquals($expected, $this->luhn->calcChecksum($number));
+        $this->assertEquals($expected, $this->luhn->calcChecksum($number), $purpose);
     }
 
     public function provideCalcChecksum_success()
     {
         return [
-            [new Number(3199723370002), 50],
+            [new Number(3199723370002), 50, "Valid checksum"],
         ];
     }
 
     /**
      * @dataProvider provideCalcCheckDigit_success
      */
-    public function testCalcCheckDigit_success($number, $expected)
+    public function testCalcCheckDigit_success($number, $expected, $purpose)
     {
         $this->assertEquals($expected, $this->luhn->calcCheckDigit($number));
     }
@@ -104,9 +103,8 @@ class LuhnAlgorithmTest extends TestCase
     public function provideCalcCheckDigit_success()
     {
         return [
-            [new Number(12345), 5],
-            [new Number(410321920), 2],
-            [new Number(3199723370002), 0],
+            [new Number(12345), 5, "Valid number"],
+            [new Number(559114884), 5, "Swedish company organization ID"],
         ];
     }
 }

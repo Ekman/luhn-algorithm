@@ -33,7 +33,7 @@ class NumberTest extends TestCase
     /**
      * @dataProvider provideFromString_success
      */
-    public function testFromString_success($number, $expected)
+    public function testFromString_success($number, $expected, $purpose)
     {
         $this->assertEquals($expected, Number::fromString($number));
     }
@@ -41,79 +41,78 @@ class NumberTest extends TestCase
     public function provideFromString_success()
     {
         return [
-            ["410321-9202", new Number('410321920', 2)],
-            [4103219202, new Number('410321920', 2)],
-            ['89148000003974165685', new Number('8914800000397416568', 5)],
-            ['abc123', new Number('12', 3)],
-            // Use any number that is larger then PHP_INT_MAX.
-            [((string) PHP_INT_MAX).'21', new Number(((string) PHP_INT_MAX).'2', 1)],
+            ["410321-9202", new Number('410321920', 2), "String"],
+            [4103219202, new Number('410321920', 2), "Integer"],
+            ['89148000003974165685', new Number('8914800000397416568', 5), "Large number"],
+            ['abc123', new Number('12', 3), "Character in string"],
+            ['922337203685477580721', new Number('92233720368547758072', 1), "Larger than INT_MAX"],
         ];
     }
 
     /**
      * @dataProvider provideFromString_fail
      */
-    public function testFromString_fail($number, $expected)
+    public function testFromString_fail($number, $expected, $purpose)
     {
-        $this->expectException($expected);
+        $this->expectException($expected, $purpose);
         Number::fromString($number);
     }
 
     public function provideFromString_fail()
     {
         return [
-            ['', \InvalidArgumentException::class],
-            ['xyz ', \InvalidArgumentException::class],
+            ['', \InvalidArgumentException::class, "Empty string"],
+            ['xyz ', \InvalidArgumentException::class, "Invalid string"],
         ];
     }
 
     /**
      * @dataProvider provideToString_success
      */
-    public function testToString_success($number, $expected)
+    public function testToString_success($number, $expected, $purpose)
     {
-        $this->assertEquals($expected, (string) $number);
+        $this->assertEquals($expected, (string) $number, $purpose);
     }
 
     public function provideToString_success()
     {
         return [
-            [new Number(12345, 5), "123455"]
+            [new Number(12345, 5), "123455", "Valid number"]
         ];
     }
 
     /**
      * @dataProvider provideNew_fail
      */
-    public function testNew_fail($number, $checkDigit, $expected)
+    public function testNew_fail($number, $checkDigit, $expected, $purpose)
     {
-        $this->expectException($expected);
+        $this->expectException($expected, $purpose);
         new Number($number, $checkDigit);
     }
 
     public function provideNew_fail()
     {
         return [
-            ['abc123', 1, \InvalidArgumentException::class],
-            ['123 ', null, \InvalidArgumentException::class],
+            ['abc123', 1, \InvalidArgumentException::class, "Invalid number"],
+            ['123 ', null, \InvalidArgumentException::class, "Whitespace"],
         ];
     }
 
     /**
      * @dataProvider provideProperties
      */
-    public function testProperties($input, $checkDigit)
+    public function testProperties($input, $checkDigit, $purpose)
     {
         $number = new Number($input, $checkDigit);
-        $this->assertEquals($input, $number->getNumber());
-        $this->assertEquals($checkDigit, $number->getCheckDigit());
+        $this->assertEquals($input, $number->getNumber(), $purpose);
+        $this->assertEquals($checkDigit, $number->getCheckDigit(), $purpose);
     }
 
     public function provideProperties()
     {
         return [
-            [123, 1],
-            [123, null],
+            [123, 1, "Valid number and checkdigit"],
+            [123, null, "Valid number and checkdigit (null)"],
         ];
     }
 }
