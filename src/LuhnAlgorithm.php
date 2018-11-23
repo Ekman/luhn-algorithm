@@ -69,6 +69,7 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
      */
     public function calcChecksum(NumberInterface $number): int
     {
+        $number = $number->getNumber();
         $nDigits = strlen($number);
         $parity = $nDigits % 2;
         $checksum = 0;
