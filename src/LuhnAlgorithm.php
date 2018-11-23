@@ -44,11 +44,9 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
             throw new \InvalidArgumentException("Check digit is null.");
         }
 
-        $checksum = $this->calcChecksum($number);
-        $sum = $checksum + $number->getCheckDigit();
+        $checksum = $this->calcChecksum($number) + $number->getCheckDigit();
 
-        // If the checksum is divisible by 10 it is valid.
-        return ($sum % 10) === 0;
+        return ($checksum % 10) === 0;
     }
 
     /**
@@ -61,7 +59,6 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
         // Get the last digit of the checksum.
         $checkDigit = $checksum % 10;
 
-        // If the check digit is not 0, then subtract the value from 10.
         return $checkDigit === 0
             ? $checkDigit
             : 10 - $checkDigit;
@@ -72,13 +69,11 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
      */
     public function calcChecksum(NumberInterface $number): int
     {
-        $number = (string) $number->getNumber();
-        // Need to account for the check digit.
-        $nDigits = strlen($number) + 1;
+        $nDigits = strlen($number);
         $parity = $nDigits % 2;
         $checksum = 0;
 
-        for ($i = 0; $i < $nDigits - 1; $i++) {
+        for ($i = 0; $i < $nDigits; $i++) {
             $digit = (int) $number[$i];
 
             // Every other digit, starting from the rightmost,
