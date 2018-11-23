@@ -69,13 +69,13 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
      */
     public function calcChecksum(NumberInterface $number): int
     {
-        $number = $number->getNumber();
-        $nDigits = strlen($number);
-        $parity = $nDigits % 2;
+        $nDigits = strlen($number->getNumber());
+        // Need to account for check digit
+        $parity = ($nDigits + 1) % 2;
         $checksum = 0;
 
         for ($i = 0; $i < $nDigits; $i++) {
-            $digit = (int) $number[$i];
+            $digit = (int) $number->getNumber()[$i];
 
             // Every other digit, starting from the rightmost,
             // shall be doubled.
