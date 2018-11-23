@@ -34,6 +34,9 @@ use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
  */
 class LuhnAlgorithmFactory
 {
+    /**
+     * @codeCoverageIgnore 
+     */
     private function __construct()
     {
         // Only static methods.
