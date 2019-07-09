@@ -3,6 +3,11 @@ nbproject/
 .idea/
 .php_cs.cache
 
+# Eclipse
+.buildpath
+.project
+.settings/
+
 # Created by http://www.gitignore.io
 
 ### Composer ###

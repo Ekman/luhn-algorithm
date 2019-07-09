@@ -36,7 +36,7 @@ class LuhnAlgorithmTest extends TestCase
      */
     private $luhn;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
         
