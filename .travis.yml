@@ -13,13 +13,9 @@ matrix:
     - php: 7.4snapshot
     - php: nightly
 
-install:
-  - composer install --no-interaction --classmap-authoritative --no-suggest
-  - composer require --no-interaction php-coveralls/php-coveralls:^2.0
+install: composer install --no-interaction --classmap-authoritative --no-suggest
 
-script:
-  - chmod +x run-phpunit.sh
-  - ./run-phpunit.sh
+script: vendor/bin/phpunit --configuration phpunit.xml
 
 after_success: vendor/bin/php-coveralls --verbose
 
