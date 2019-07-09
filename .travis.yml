@@ -8,7 +8,7 @@ php:
   - 7.4snapshot
 
 install:
-  - composer install --no-interaction --classmap-authoritative
+  - composer install --no-interaction --classmap-authoritative --no-suggest
   - composer require --no-interaction php-coveralls/php-coveralls:^2.0
 
 script:
