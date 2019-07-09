@@ -1,7 +1,5 @@
 language: php
 
-env: COMPOSER_FLAGS="--no-interaction --classmap-authoritative --no-suggest"
-
 php:
   - 7.0
   - 7.1
@@ -14,9 +12,9 @@ matrix:
   allow_failures:
     - php: 7.4snapshot
     - php: nightly
-      env: COMPOSER_FLAGS="${COMPOSER_FLAGS} --ignore-platform-reqs"
+      env: COMPOSER_IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
 
-install: composer install ${COMPOSER_FLAGS}
+install: composer install --no-interaction --classmap-authoritative --no-suggest ${COMPOSER_IGNORE_PLATFORM_REQS}
 
 script: vendor/bin/phpunit --configuration phpunit.xml
 
