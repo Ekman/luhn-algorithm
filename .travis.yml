@@ -7,11 +7,13 @@ php:
   - 7.3
   - 7.4snapshot
   - nightly
+  - hhvm
   
 matrix:
   allow_failures:
   - php: 7.4snapshot
   - php: nightly
+  - php: hhvm
 
 install: composer install --no-interaction --classmap-authoritative --no-suggest --ignore-platform-reqs
 
