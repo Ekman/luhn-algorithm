@@ -12,9 +12,8 @@ matrix:
   allow_failures:
   - php: 7.4snapshot
   - php: nightly
-    env: COMPOSER_IGNORE_PLATFORM_REQS="--ignore-platform-reqs"
 
-install: composer install --no-interaction --classmap-authoritative --no-suggest ${COMPOSER_IGNORE_PLATFORM_REQS}
+install: composer install --no-interaction --classmap-authoritative --no-suggest --ignore-platform-reqs
 
 script: vendor/bin/phpunit --configuration phpunit.xml
 
