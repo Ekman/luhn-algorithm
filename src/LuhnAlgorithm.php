@@ -41,7 +41,7 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
     public function isValid(NumberInterface $number): bool
     {
         if ($number->getCheckDigit() === null) {
-            throw new \InvalidArgumentException('Check digit is null.');
+            throw new \InvalidArgumentException("Check digit is null.");
         }
 
         $checksum = $this->calcChecksum($number) + $number->getCheckDigit();
