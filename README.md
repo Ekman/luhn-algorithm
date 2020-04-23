@@ -23,7 +23,7 @@ In order to instantiate a new instance of the library, use the factory:
  $luhn = LuhnAlgorithmFactory::create();
  ```
 
-You can find [the facade the library in the `LuhnAlgorithmInterface`](src/Contract/LuhnAlgorithmInterface.php).
+You can find [the library facade in the `LuhnAlgorithmInterface.php` file](src/Contract/LuhnAlgorithmInterface.php).
 
 [The `Number` class](src/Number.php) is a container class that holds the actual number and the check digit. It does no validation nor does it calculate the check digit. It exists to clearly separate the number from the check digit and to define when the check digit exists or not. To simplify the process of validating a number you can use the named constructor `Number::fromString()` like this:
  
