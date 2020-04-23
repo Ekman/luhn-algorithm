@@ -41,9 +41,9 @@ interface LuhnAlgorithmInterface
      *
      * @param NumberInterface $number The number to validate.
      *
+     * @throws MissingCheckDigitException If the check digit in the number is not set.
      * @return bool true if number is valid, false otherwise.
      *
-     * @throws MissingCheckDigitException If the check digit in the number is not set.
      */
     public function isValid(NumberInterface $number): bool;
 
