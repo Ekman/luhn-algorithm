@@ -33,7 +33,7 @@ use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
 /**
  * Input for the Luhn Algorithm contains a number and a check digit.
  */
-class Number implements NumberInterface, \JsonSerializable, \Serializable
+class Number implements NumberInterface, \Serializable
 {
     /**
      * @var string
@@ -123,13 +123,5 @@ class Number implements NumberInterface, \JsonSerializable, \Serializable
     public function unserialize($serialized)
     {
         list($this->number, $this->checkDigit) = unserialize($serialized);
-    }
-
-    public function jsonSerialize()
-    {
-        return [
-            "number" => $this->number,
-            "checkDigit" => $this->checkDigit,
-        ];
     }
 }
