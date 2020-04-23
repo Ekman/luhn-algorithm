@@ -29,6 +29,7 @@ namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
+use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
 
 /**
  * {@inheritdoc}
@@ -41,7 +42,7 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
     public function isValid(NumberInterface $number): bool
     {
         if ($number->getCheckDigit() === null) {
-            throw new \InvalidArgumentException("Check digit is null.");
+            throw new MissingCheckDigitException("Check digit is null.");
         }
 
         $checksum = $this->calcChecksum($number) + $number->getCheckDigit();
