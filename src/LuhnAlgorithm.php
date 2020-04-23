@@ -37,6 +37,15 @@ use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
 class LuhnAlgorithm implements LuhnAlgorithmInterface
 {
     /**
+     * @internal The intended way to instantiate this object is through the factory.
+     *
+     * @see LuhnAlgorithmFactory
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function isValid(NumberInterface $number): bool
