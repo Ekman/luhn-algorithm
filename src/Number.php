@@ -28,6 +28,7 @@ declare(strict_types=1);
 namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
+use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
 
 /**
  * Input for the Luhn Algorithm contains a number and a check digit.
@@ -45,9 +46,10 @@ class Number implements NumberInterface
     private $checkDigit;
 
     /**
-     * Input constructor.
      * @param string $number The number.
      * @param int|null $checkDigit [Optional] The check digit for the number.
+     *
+     * @throws ArgumentIsNotNumericException If the number input does not consist entirely of numbers.
      */
     public function __construct(string $number, int $checkDigit = null)
     {
@@ -66,6 +68,8 @@ class Number implements NumberInterface
      * @param string $input The input that contains the check digit already.
      *
      * @return self
+     *
+     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      */
     public static function fromString(string $input): self
     {

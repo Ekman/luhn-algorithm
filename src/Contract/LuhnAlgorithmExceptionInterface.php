@@ -27,41 +27,9 @@ declare(strict_types=1);
 
 namespace Nekman\LuhnAlgorithm\Contract;
 
-use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
-
 /**
- * Handles the Luhn Algorithm.
- *
- * @link http://en.wikipedia.org/wiki/Luhn_algorithm
+ * Base interface for all thrown exceptions in this library.
  */
-interface LuhnAlgorithmInterface
+interface LuhnAlgorithmExceptionInterface extends \Throwable
 {
-    /**
-     * Determine if a number is valid according to the Luhn Algorithm.
-     *
-     * @param NumberInterface $number The number to validate.
-     *
-     * @return bool true if number is valid, false otherwise.
-     *
-     * @throws MissingCheckDigitException If the check digit in the number is not set.
-     */
-    public function isValid(NumberInterface $number): bool;
-
-    /**
-     * Calculate the check digit for an input.
-     *
-     * @param NumberInterface $number The number to calculate the check digit for.
-     *
-     * @return int The check digit.
-     */
-    public function calcCheckDigit(NumberInterface $number): int;
-
-    /**
-     * Calulates the checksum for number.
-     *
-     * @param NumberInterface $number The number to calculate the checksum for.
-     *
-     * @return int The checksum.
-     */
-    public function calcChecksum(NumberInterface $number): int;
 }

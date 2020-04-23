@@ -25,16 +25,13 @@
 
 declare(strict_types=1);
 
-namespace Nekman\LuhnAlgorithm;
+namespace Nekman\LuhnAlgorithm\Exceptions;
 
-class ArgumentIsNotNumericException extends \InvalidArgumentException
+use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmExceptionInterface;
+
+/**
+ * Indicates that the check digit should be present, but is in fact not.
+ */
+class MissingCheckDigitException extends \InvalidArgumentException implements LuhnAlgorithmExceptionInterface
 {
-    /**
-     * ArgumentIsNotNumericException constructor.
-     * @param string $number
-     */
-    public function __construct(string $number)
-    {
-        parent::__construct("Expects \$number to be a number, \"{$number}\" given.", 0, null);
-    }
 }

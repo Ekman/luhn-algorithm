@@ -29,6 +29,7 @@ namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
+use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
 
 /**
  * {@inheritdoc}
@@ -36,12 +37,21 @@ use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 class LuhnAlgorithm implements LuhnAlgorithmInterface
 {
     /**
+     * @internal The intended way to instantiate this object is through the factory.
+     *
+     * @see LuhnAlgorithmFactory
+     */
+    public function __construct()
+    {
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function isValid(NumberInterface $number): bool
     {
         if ($number->getCheckDigit() === null) {
-            throw new \InvalidArgumentException("Check digit is null.");
+            throw new MissingCheckDigitException("Check digit is null.");
         }
 
         $checksum = $this->calcChecksum($number) + $number->getCheckDigit();
