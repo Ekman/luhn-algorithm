@@ -95,6 +95,7 @@ class LuhnAlgorithmTest extends TestCase
     {
         return [
             "Valid checksum" => [new Number(3199723370002), 50],
+            "Checksum mod 10 is 0" => [new Number(31997), 30],
         ];
     }
 
@@ -112,6 +113,7 @@ class LuhnAlgorithmTest extends TestCase
             "Valid number" => [new Number(12345), 5],
             "Swedish company organization ID" => [new Number(559114884), 5],
             "Swedish organization number" => [new Number(640319261), 7],
+            "Checksum mod 10 is 0" => [new Number(31997), 0],
         ];
     }
 }
