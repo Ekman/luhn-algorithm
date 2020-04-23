@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2018 Niklas Ekman
+ * Copyright (c) 2020 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -67,9 +67,9 @@ class Number implements NumberInterface
      *
      * @param string $input The input that contains the check digit already.
      *
+     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      * @return self
      *
-     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      */
     public static function fromString(string $input): self
     {
