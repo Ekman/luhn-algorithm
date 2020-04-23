@@ -102,6 +102,10 @@ class Number implements NumberInterface
         return $this->checkDigit;
     }
 
+    
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->number . $this->checkDigit;
