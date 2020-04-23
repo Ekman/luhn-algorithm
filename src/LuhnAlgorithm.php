@@ -55,7 +55,7 @@ class LuhnAlgorithm implements LuhnAlgorithmInterface
     public function calcCheckDigit(NumberInterface $number): int
     {
         $checksum = $this->calcChecksum($number);
-        
+
         // Get the last digit of the checksum.
         $checkDigit = $checksum % 10;
 

@@ -52,7 +52,7 @@ class Number implements NumberInterface
     public function __construct(string $number, int $checkDigit = null)
     {
         if (!is_numeric($number)) {
-            throw new \InvalidArgumentException("Expects \$number to be a number, \"{$number}\" given.");
+            throw new ArgumentIsNotNumericException($number);
         }
 
         $this->number = $number;
@@ -72,14 +72,16 @@ class Number implements NumberInterface
         $input = preg_replace('/[^\d]/', '', $input);
 
         if (!is_numeric($input)) {
-            throw new \InvalidArgumentException("Expects \$input to be a number, \"{$input}\" given.");
+            throw new ArgumentIsNotNumericException($input);
         }
 
+        $lastIndex = strlen($input) - 1;
+
         // Get the last digit.
-        $checkDigit = (int) $input[strlen($input) - 1];
+        $checkDigit = (int) $input[$lastIndex];
 
         // Remove the last digit.
-        $number = substr($input, 0, strlen($input) - 1);
+        $number = substr($input, 0, $lastIndex);
 
         return new self($number, $checkDigit);
     }
@@ -100,11 +102,12 @@ class Number implements NumberInterface
         return $this->checkDigit;
     }
 
+    
     /**
      * {@inheritdoc}
      */
     public function __toString()
     {
-        return (string) $this->number . (string) $this->checkDigit;
+        return $this->number . $this->checkDigit;
     }
 }
