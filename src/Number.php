@@ -67,9 +67,9 @@ class Number implements NumberInterface, \Serializable
      *
      * @param string $input The input that contains the check digit already.
      *
-     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      * @return self
      *
+     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      */
     public static function fromString(string $input): self
     {
