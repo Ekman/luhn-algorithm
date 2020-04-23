@@ -33,7 +33,7 @@ use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
 /**
  * Input for the Luhn Algorithm contains a number and a check digit.
  */
-class Number implements NumberInterface
+class Number implements NumberInterface, \Serializable
 {
     /**
      * @var string
@@ -113,5 +113,15 @@ class Number implements NumberInterface
     public function __toString()
     {
         return $this->number . $this->checkDigit;
+    }
+
+    public function serialize()
+    {
+        return serialize([$this->number, $this->checkDigit]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list($this->number, $this->checkDigit) = unserialize($serialized);
     }
 }

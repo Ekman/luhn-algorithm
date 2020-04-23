@@ -121,4 +121,14 @@ class NumberTest extends TestCase
             "Valid number and check digit (null)" => [123, null],
         ];
     }
+
+    public function testSerialize()
+    {
+        $number = new Number(133, 7);
+        $serialized = serialize($number);
+        $other = unserialize($serialized);
+        $this->assertInstanceOf(Number::class, $other);
+        $this->assertEquals(133, $other->getNumber());
+        $this->assertEquals(7, $other->getCheckDigit());
+    }
 }
