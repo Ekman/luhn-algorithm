@@ -69,7 +69,7 @@ class Number implements NumberInterface
      */
     public static function fromString(string $input): self
     {
-        $input = preg_replace('/\D/', '', $input);
+        $input = preg_replace('/[^\d]/', '', $input);
 
         if (!is_numeric($input)) {
             throw new ArgumentIsNotNumericException($input);
