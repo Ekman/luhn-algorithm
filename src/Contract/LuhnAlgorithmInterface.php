@@ -27,6 +27,9 @@ declare(strict_types=1);
 
 namespace Nekman\LuhnAlgorithm\Contract;
 
+use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
+use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
+
 /**
  * Handles the Luhn Algorithm.
  *
@@ -40,6 +43,8 @@ interface LuhnAlgorithmInterface
      * @param NumberInterface $number The number to validate.
      *
      * @return bool true if number is valid, false otherwise.
+     *
+     * @throws MissingCheckDigitException If the check digit in the number is not set.
      */
     public function isValid(NumberInterface $number): bool;
 

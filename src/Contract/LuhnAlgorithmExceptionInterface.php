@@ -1,4 +1,4 @@
-<?php
+<?
 
 /*
  * The MIT License (MIT)
@@ -25,16 +25,12 @@
 
 declare(strict_types=1);
 
-namespace Nekman\LuhnAlgorithm;
+namespace Nekman\LuhnAlgorithm\Contract;
 
-class ArgumentIsNotNumericException extends \InvalidArgumentException
+/**
+ * Base interface for all thrown exceptions in this library.
+ */
+interface LuhnAlgorithmExceptionInterface extends \Throwable
 {
-    /**
-     * ArgumentIsNotNumericException constructor.
-     * @param string $number
-     */
-    public function __construct(string $number)
-    {
-        parent::__construct("Expects \$number to be a number, \"{$number}\" given.", 0, null);
-    }
+
 }
