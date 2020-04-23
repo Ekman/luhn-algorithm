@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
  * The MIT License (MIT)
@@ -32,5 +32,4 @@ namespace Nekman\LuhnAlgorithm\Contract;
  */
 interface LuhnAlgorithmExceptionInterface extends \Throwable
 {
-
 }

@@ -34,5 +34,4 @@ use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmExceptionInterface;
  */
 class MissingCheckDigitException extends \InvalidArgumentException implements LuhnAlgorithmExceptionInterface
 {
-
 }
