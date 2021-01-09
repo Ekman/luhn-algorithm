@@ -27,9 +27,11 @@ declare(strict_types=1);
 
 namespace Nekman\LuhnAlgorithm\Contract;
 
+use Throwable;
+
 /**
  * Base interface for all thrown exceptions in this library.
  */
-interface LuhnAlgorithmExceptionInterface extends \Throwable
+interface LuhnAlgorithmExceptionInterface extends Throwable
 {
 }

@@ -31,8 +31,8 @@ use PHPUnit\Framework\TestCase;
 
 class LuhmAlgorithmFactoryTest extends TestCase
 {
-    public function testCreate()
-    {
-        $this->assertInstanceOf(LuhnAlgorithm::class, LuhnAlgorithmFactory::create());
-    }
+	public function testCreate()
+	{
+		$this->assertInstanceOf(LuhnAlgorithm::class, LuhnAlgorithmFactory::create());
+	}
 }

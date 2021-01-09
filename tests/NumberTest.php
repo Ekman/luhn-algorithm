@@ -32,103 +32,103 @@ use PHPUnit\Framework\TestCase;
 
 class NumberTest extends TestCase
 {
-    /**
-     * @dataProvider provideFromString_success
-     */
-    public function testFromString_success($number, $expected)
-    {
-        $this->assertEquals($expected, Number::fromString($number));
-    }
+	/**
+	 * @dataProvider provideFromString_success
+	 */
+	public function testFromString_success($number, $expected)
+	{
+		$this->assertEquals($expected, Number::fromString($number));
+	}
 
-    public function provideFromString_success()
-    {
-        return [
-            "String" => ["410321-9202", new Number('410321920', 2)],
-            "Integer" => [4103219202, new Number('410321920', 2)],
-            "Large number" => ['89148000003974165685', new Number('8914800000397416568', 5)],
-            "Character in string" => ['abc123', new Number('12', 3)],
-            "Larger than INT_MAX" => ['922337203685477580721', new Number('92233720368547758072', 1)],
-        ];
-    }
+	public function provideFromString_success()
+	{
+		return [
+			"String" => ["410321-9202", new Number('410321920', 2)],
+			"Integer" => [4103219202, new Number('410321920', 2)],
+			"Large number" => ['89148000003974165685', new Number('8914800000397416568', 5)],
+			"Character in string" => ['abc123', new Number('12', 3)],
+			"Larger than INT_MAX" => ['922337203685477580721', new Number('92233720368547758072', 1)],
+		];
+	}
 
-    /**
-     * @dataProvider provideFromString_fail
-     */
-    public function testFromString_fail($number, $expected)
-    {
-        $this->expectException($expected);
-        Number::fromString($number);
-    }
+	/**
+	 * @dataProvider provideFromString_fail
+	 */
+	public function testFromString_fail($number, $expected)
+	{
+		$this->expectException($expected);
+		Number::fromString($number);
+	}
 
-    public function provideFromString_fail()
-    {
-        return [
-            "Empty string" => ['', \InvalidArgumentException::class],
-            "Invalid string" => ['xyz ', \InvalidArgumentException::class],
-            "Should be ArgumentIsNotNullException" => ["foo", ArgumentIsNotNumericException::class],
-            "Should be LuhnAlgorithmExceptionInterface" => ["bar", LuhnAlgorithmExceptionInterface::class],
-        ];
-    }
+	public function provideFromString_fail()
+	{
+		return [
+			"Empty string" => ['', \InvalidArgumentException::class],
+			"Invalid string" => ['xyz ', \InvalidArgumentException::class],
+			"Should be ArgumentIsNotNullException" => ["foo", ArgumentIsNotNumericException::class],
+			"Should be LuhnAlgorithmExceptionInterface" => ["bar", LuhnAlgorithmExceptionInterface::class],
+		];
+	}
 
-    /**
-     * @dataProvider provideToString_success
-     */
-    public function testToString_success($number, $expected)
-    {
-        $this->assertEquals($expected, (string) $number);
-    }
+	/**
+	 * @dataProvider provideToString_success
+	 */
+	public function testToString_success($number, $expected)
+	{
+		$this->assertEquals($expected, (string)$number);
+	}
 
-    public function provideToString_success()
-    {
-        return [
-            "Valid number" => [new Number(12345, 5), "123455"]
-        ];
-    }
+	public function provideToString_success()
+	{
+		return [
+			"Valid number" => [new Number(12345, 5), "123455"]
+		];
+	}
 
-    /**
-     * @dataProvider provideNew_fail
-     */
-    public function testNew_fail($number, $checkDigit, $expected)
-    {
-        $this->expectException($expected);
-        new Number($number, $checkDigit);
-    }
+	/**
+	 * @dataProvider provideNew_fail
+	 */
+	public function testNew_fail($number, $checkDigit, $expected)
+	{
+		$this->expectException($expected);
+		new Number($number, $checkDigit);
+	}
 
-    public function provideNew_fail()
-    {
-        return [
-            "Invalid number" => ['abc123', 1, \InvalidArgumentException::class],
-            "Whitespace" => ['123 ', null, \InvalidArgumentException::class],
-            "Should be ArgumentIsNotNullException" => ["foo", null, ArgumentIsNotNumericException::class],
-            "Should be LuhnAlgorithmExceptionInterface" => ["bar", null, LuhnAlgorithmExceptionInterface::class],
-        ];
-    }
+	public function provideNew_fail()
+	{
+		return [
+			"Invalid number" => ['abc123', 1, \InvalidArgumentException::class],
+			"Whitespace" => ['123 ', null, \InvalidArgumentException::class],
+			"Should be ArgumentIsNotNullException" => ["foo", null, ArgumentIsNotNumericException::class],
+			"Should be LuhnAlgorithmExceptionInterface" => ["bar", null, LuhnAlgorithmExceptionInterface::class],
+		];
+	}
 
-    /**
-     * @dataProvider provideProperties
-     */
-    public function testProperties($input, $checkDigit)
-    {
-        $number = new Number($input, $checkDigit);
-        $this->assertEquals($input, $number->getNumber());
-        $this->assertEquals($checkDigit, $number->getCheckDigit());
-    }
+	/**
+	 * @dataProvider provideProperties
+	 */
+	public function testProperties($input, $checkDigit)
+	{
+		$number = new Number($input, $checkDigit);
+		$this->assertEquals($input, $number->getNumber());
+		$this->assertEquals($checkDigit, $number->getCheckDigit());
+	}
 
-    public function provideProperties()
-    {
-        return [
-            "Valid number and check digit" => [123, 1],
-            "Valid number and check digit (null)" => [123, null],
-        ];
-    }
+	public function provideProperties()
+	{
+		return [
+			"Valid number and check digit" => [123, 1],
+			"Valid number and check digit (null)" => [123, null],
+		];
+	}
 
-    public function testSerialize()
-    {
-        $number = new Number(133, 7);
-        $serialized = serialize($number);
-        $other = unserialize($serialized);
-        $this->assertInstanceOf(Number::class, $other);
-        $this->assertEquals(133, $other->getNumber());
-        $this->assertEquals(7, $other->getCheckDigit());
-    }
+	public function testSerialize()
+	{
+		$number = new Number(133, 7);
+		$serialized = serialize($number);
+		$other = unserialize($serialized);
+		$this->assertInstanceOf(Number::class, $other);
+		$this->assertEquals(133, $other->getNumber());
+		$this->assertEquals(7, $other->getCheckDigit());
+	}
 }
