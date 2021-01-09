@@ -36,71 +36,71 @@ use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
  */
 class LuhnAlgorithm implements LuhnAlgorithmInterface
 {
-    /**
-     * @internal The intended way to instantiate this object is through the factory.
-     *
-     * @see LuhnAlgorithmFactory
-     */
-    public function __construct()
-    {
-    }
+	/**
+	 * @internal The intended way to instantiate this object is through the factory.
+	 *
+	 * @see LuhnAlgorithmFactory
+	 */
+	public function __construct()
+	{
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public function isValid(NumberInterface $number): bool
-    {
-        if ($number->getCheckDigit() === null) {
-            throw new MissingCheckDigitException("Check digit is null.");
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	public function isValid(NumberInterface $number): bool
+	{
+		if ($number->getCheckDigit() === null) {
+			throw new MissingCheckDigitException("Check digit is null.");
+		}
 
-        $checksum = $this->calcChecksum($number) + $number->getCheckDigit();
+		$checksum = $this->calcChecksum($number) + $number->getCheckDigit();
 
-        return ($checksum % 10) === 0;
-    }
+		return ($checksum % 10) === 0;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public function calcCheckDigit(NumberInterface $number): int
-    {
-        $checksum = $this->calcChecksum($number);
+	/**
+	 * {@inheritDoc}
+	 */
+	public function calcChecksum(NumberInterface $number): int
+	{
+		$num = $number->getNumber();
+		$nDigits = strlen($num);
+		// Need to account for check digit
+		$parity = ($nDigits + 1) % 2;
+		$checksum = 0;
 
-        // Get the last digit of the checksum.
-        $checkDigit = $checksum % 10;
+		for ($i = 0; $i < $nDigits; $i++) {
+			$digit = (int)$num[$i];
 
-        return $checkDigit === 0
-            ? $checkDigit
-            : 10 - $checkDigit;
-    }
+			// Every other digit, starting from the rightmost,
+			// shall be doubled.
+			if (($i % 2) === $parity) {
+				$digit *= 2;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function calcChecksum(NumberInterface $number): int
-    {
-        $num = $number->getNumber();
-        $nDigits = strlen($num);
-        // Need to account for check digit
-        $parity = ($nDigits + 1) % 2;
-        $checksum = 0;
+				if ($digit > 9) {
+					$digit -= 9;
+				}
+			}
 
-        for ($i = 0; $i < $nDigits; $i++) {
-            $digit = (int) $num[$i];
+			$checksum += $digit;
+		}
 
-            // Every other digit, starting from the rightmost,
-            // shall be doubled.
-            if (($i % 2) === $parity) {
-                $digit *= 2;
+		return $checksum;
+	}
 
-                if ($digit > 9) {
-                    $digit -= 9;
-                }
-            }
+	/**
+	 * {@inheritDoc}
+	 */
+	public function calcCheckDigit(NumberInterface $number): int
+	{
+		$checksum = $this->calcChecksum($number);
 
-            $checksum += $digit;
-        }
+		// Get the last digit of the checksum.
+		$checkDigit = $checksum % 10;
 
-        return $checksum;
-    }
+		return $checkDigit === 0
+			? $checkDigit
+			: 10 - $checkDigit;
+	}
 }

@@ -27,15 +27,16 @@ declare(strict_types=1);
 
 namespace Nekman\LuhnAlgorithm\Exceptions;
 
+use InvalidArgumentException;
 use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmExceptionInterface;
 
 /**
  * Indicates that an argument should be numeric, but is in fact not.
  */
-class ArgumentIsNotNumericException extends \InvalidArgumentException implements LuhnAlgorithmExceptionInterface
+class ArgumentIsNotNumericException extends InvalidArgumentException implements LuhnAlgorithmExceptionInterface
 {
-    public function __construct(string $number)
-    {
-        parent::__construct("Expects \$number to be a number, \"{$number}\" given.");
-    }
+	public function __construct(string $number)
+	{
+		parent::__construct("Expects \$number to be a number, \"{$number}\" given.");
+	}
 }
