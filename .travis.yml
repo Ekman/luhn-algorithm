@@ -10,7 +10,7 @@ php:
 
 matrix:
   allow_failures:
-  - php: nightly
+    - php: nightly
 
 install: composer update --no-interaction --classmap-authoritative --no-suggest --ignore-platform-reqs --prefer-lowest
 
