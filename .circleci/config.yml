@@ -4,7 +4,7 @@ orbs:
   composer: stockfiller/composer@0.0.38
   php-cs-fixer: stockfiller/php-cs-fixer@0.0.18
   phpunit: stockfiller/phpunit@0.0.13
-  php-coveralls: stockfiller/php-coveralls@0.0.5
+  php-coveralls: nekman/php-coveralls@0.0.5
 
 executors:
   php74:
