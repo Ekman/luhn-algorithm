@@ -1,6 +1,6 @@
 # Luhn Algorithm
 
-[![Build Status](https://circleci.com/github/Ekman/luhn-algorithm.svg?style=shield)](https://app.circleci.com/pipelines/github/Ekman)
+[![Build Status](https://circleci.com/gh/Ekman/luhn-algorithm.svg?style=svg)](https://app.circleci.com/pipelines/github/Ekman)
 [![Coverage Status](https://coveralls.io/repos/github/Ekman/luhn-algorithm/badge.svg?branch=master)](https://coveralls.io/github/Ekman/luhn-algorithm?branch=master)
 
 This is a zero dependency implementation of the Luhn Algorithm for PHP 7.0 and above. The Luhn Algorithm is used to validate things like credit cards and national identification numbers. More information on the algorithm can be found at [Wikipedia](http://en.wikipedia.org/wiki/Luhn_algorithm).
