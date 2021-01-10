@@ -35,5 +35,5 @@ namespace Nekman\LuhnAlgorithm\Functions;
  */
 function string_is_numeric(string $possibleNumber): bool
 {
-    return preg_match("/^\d+(\.\d+)?$/", $possibleNumber);
+    return preg_match("/^\d+(\.\d+)?$/", $possibleNumber) === 1;
 }
