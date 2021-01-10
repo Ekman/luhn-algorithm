@@ -4,6 +4,7 @@ orbs:
   composer: stockfiller/composer@0.0.38
   php-cs-fixer: stockfiller/php-cs-fixer@0.0.18
   phpunit: stockfiller/phpunit@0.0.13
+  php-coveralls: stockfiller/php-coveralls@0.0.5
 
 executors:
   php74:
@@ -53,14 +54,15 @@ workflows:
               ignore: master
       - phpunit/test:
           <<: *unit-tests
-          flags: --coverage-clover coverage/clover.xml
+          environment:
+            CLOVER_PATH: coverage/clover.xml
+          flags: --coverage-clover ${CLOVER_PATH}
           pre-steps:
             - install_pcov_git
             - composer/install_bin
           post-steps:
-            - run: php vendor/bin/php-coveralls --verbose
-            - store_artifacts:
-                path: coverage/clover.xml
+            - php-coveralls/upload:
+                clover-path: "${CLOVER_PATH}"
           filters: *branch-filters
           requires:
             - coding-standards
