@@ -54,15 +54,13 @@ workflows:
               ignore: master
       - phpunit/test:
           <<: *unit-tests
-          environment:
-            CLOVER_PATH: coverage/clover.xml
-          flags: --coverage-clover ${CLOVER_PATH}
+          flags: --coverage-clover coverage/clover.xml
           pre-steps:
             - install_pcov_git
             - composer/install_bin
           post-steps:
             - php-coveralls/upload:
-                clover-path: "${CLOVER_PATH}"
+                clover-path: coverage/clover.xml
           filters: *branch-filters
           requires:
             - coding-standards
