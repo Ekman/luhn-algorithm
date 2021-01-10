@@ -24,7 +24,7 @@ commands:
           command: |-
             #!/bin/sh
             apk add --update --no-cache ${PHPIZE_DEPS}
-            yes | pecl install xdebug-3.0.2 || exit 0
+            yes | pecl install xdebug-3.0.1
             docker-php-ext-enable xdebug
             apk del --purge --no-cache ${PHPIZE_DEPS}
 
