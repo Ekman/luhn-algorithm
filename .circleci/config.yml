@@ -14,22 +14,20 @@ executors:
       - image: php:7.4-alpine
       - image: php:8.0-alpine
 
+commands:
+  install_xdebug:
+    steps:
+      - run: |
+          apk add --update --no-cache ${PHPIZE_DEPS} wget
+          yes | pecl install xdebug-3.0.2
+          docker-php-ext-enable xdebug
+
 workflows:
   master:
     jobs:
       - phpunit/test: &test
-          flags: --coverage-clover coverage/clover.xml
-          no-cache: false # not all phpunit versions supports ignoring cache
           pre-steps:
-            - run: |
-                apk add --update --no-cache ${PHPIZE_DEPS} wget
-                yes | pecl install xdebug-3.0.2
-                docker-php-ext-enable xdebug
             - composer/install_bin
-          post-steps:
-            - run: php vendor/bin/php-coveralls --coverage_clover coverage/clover.xml
-            - store_artifacts:
-                path: coverage/clover.xml
           filters:
             branches:
               only: master
@@ -45,6 +43,14 @@ workflows:
               ignore: master
       - phpunit/test:
           <<: *test
+          flags: --coverage-clover coverage/clover.xml
+          pre-steps:
+            - install_xdebug
+            - composer/install_bin
+          post-steps:
+            - run: php vendor/bin/php-coveralls --coverage_clover coverage/clover.xml
+            - store_artifacts:
+                path: coverage/clover.xml
           filters: *branch-filters
           requires:
             - coding-standards
