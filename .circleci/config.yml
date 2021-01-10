@@ -20,12 +20,12 @@ commands:
   install_xdebug:
     steps:
       - run:
-          name: Install Xdebug
+          name: Install PCOV
           command: |-
             #!/bin/sh
             apk add --update --no-cache ${PHPIZE_DEPS}
-            yes | pecl install xdebug-3.0.0
-            docker-php-ext-enable xdebug
+            yes | pecl install pcov-1.0.6
+            docker-php-ext-enable pcov
             apk del --purge --no-cache ${PHPIZE_DEPS}
 
 workflows:
