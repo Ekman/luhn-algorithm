@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   composer: stockfiller/composer@0.0.38
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.15
+  php-cs-fixer: stockfiller/php-cs-fixer@0.0.16
   phpunit: stockfiller/phpunit@0.0.13
 
 executors:
