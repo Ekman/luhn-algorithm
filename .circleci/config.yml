@@ -16,16 +16,6 @@ executors:
       - image: php:8.0-alpine
     resource_class: small
 
-commands:
-  install_pcov_git:
-    steps:
-      - run:
-          name: Install PCOV and Git
-          command: |-
-            apk add --update --no-cache ${PHPIZE_DEPS} git
-            pecl install pcov-1.0.6
-            docker-php-ext-enable pcov
-
 workflows:
   master:
     jobs:
@@ -49,6 +39,7 @@ workflows:
           rules: "@PSR2"
           pre-steps:
             - composer/install_bin
+            - run: apk add --update --no-cache git
           filters: &branch-filters
             branches:
               ignore: master
@@ -56,7 +47,10 @@ workflows:
           <<: *unit-tests
           flags: --coverage-clover coverage/clover.xml
           pre-steps:
-            - install_pcov_git
+            - run: |-
+                apk add --update --no-cache ${PHPIZE_DEPS} git
+                pecl install pcov-1.0.6
+                docker-php-ext-enable pcov
             - composer/install_bin
           post-steps:
             - php-coveralls/upload:
