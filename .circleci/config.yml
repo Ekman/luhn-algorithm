@@ -55,7 +55,7 @@ workflows:
             - install_xdebug
             - composer/install_bin
           post-steps:
-            - run: php vendor/bin/php-coveralls
+            - run: php vendor/bin/php-coveralls --verbose
             - store_artifacts:
                 path: coverage/clover.xml
           filters: *branch-filters
