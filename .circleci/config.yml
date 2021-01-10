@@ -9,10 +9,12 @@ executors:
   default:
     docker:
       - image: php:7.4-alpine
+    resource_class: small
   matrix:
     docker:
       - image: php:7.4-alpine
       - image: php:8.0-alpine
+    resource_class: small
 
 commands:
   install_xdebug:
@@ -21,9 +23,10 @@ commands:
           name: Install Xdebug
           command: |-
             #!/bin/sh
-            apk add --update --no-cache ${PHPIZE_DEPS} wget
+            apk add --update --no-cache ${PHPIZE_DEPS}
             yes | pecl install xdebug-3.0.2
             docker-php-ext-enable xdebug
+            apk del --purge --no-cache ${PHPIZE_DEPS}
 
 workflows:
   master:
