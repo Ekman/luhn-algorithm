@@ -14,31 +14,24 @@ executors:
       - image: php:7.4-alpine
       - image: php:8.0-alpine
 
-jobs:
-  test:
-    executor: matrix
-    environment:
-      CLOVER_PATH: coverage/clover.xml
-    steps:
-      - checkout
-      - composer/install
-      - phpunit/test:
-          flags: --coverage-clover ${CLOVER_PATH}
-          no-cache: false # not all phpunit versions supports ignoring cache
-      - run: php vendor/bin/php-coveralls --coverage_clover ${CLOVER_PATH}
-      - store_artifacts:
-          path: "${CLOVER_PATH}"
-
 workflows:
   master:
     jobs:
-      - test: &test
+      - phpunit/test: &test
+          environment:
+            CLOVER_PATH: coverage/clover.xml
+          flags: --coverage-clover ${CLOVER_PATH}
+            no-cache: false # not all phpunit versions supports ignoring cache
           pre-steps:
             - run: |
                 apk add --update --no-cache ${PHPIZE_DEPS} wget
                 yes | pecl install xdebug-3.0.2
                 docker-php-ext-enable xdebug
             - composer/install_bin
+          post-steps:
+            - run: php vendor/bin/php-coveralls --coverage_clover ${CLOVER_PATH}
+            - store_artifacts:
+                path: "${CLOVER_PATH}"
           filters:
             branches:
               only: master
