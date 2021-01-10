@@ -38,7 +38,7 @@ workflows:
           executor: php74
           rules: "@PSR2"
           pre-steps:
-            - run: apk add --update --no-cache git
+            - run: apk add --update --no-cache git openssh-client
             - composer/install_bin
           filters: &branch-filters
             branches:
