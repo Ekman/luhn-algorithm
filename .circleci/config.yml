@@ -29,7 +29,8 @@ commands:
 workflows:
   master:
     jobs:
-      - phpunit/test: &test
+      - phpunit/test: &unit-tests
+          name: unit-tests
           executor: matrix
           pre-steps:
             - composer/install_bin
@@ -48,7 +49,7 @@ workflows:
             branches:
               ignore: master
       - phpunit/test:
-          <<: *test
+          <<: *unit-tests
           flags: --coverage-clover coverage/clover.xml
           pre-steps:
             - install_xdebug
