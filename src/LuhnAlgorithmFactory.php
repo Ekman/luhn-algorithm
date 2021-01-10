@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Niklas Ekman
+ * Copyright (c) 2021 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,21 +34,21 @@ use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
  */
 class LuhnAlgorithmFactory
 {
-	/**
-	 * @codeCoverageIgnore
-	 */
-	private function __construct()
-	{
-		// Only static methods.
-	}
+    /**
+     * @codeCoverageIgnore
+     */
+    private function __construct()
+    {
+        // Only static methods.
+    }
 
-	/**
-	 * Create a new instance of an implementation of the Luhn Algorithm.
-	 *
-	 * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
-	 */
-	public static function create(): LuhnAlgorithmInterface
-	{
-		return new LuhnAlgorithm();
-	}
+    /**
+     * Create a new instance of an implementation of the Luhn Algorithm.
+     *
+     * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
+     */
+    public static function create(): LuhnAlgorithmInterface
+    {
+        return new LuhnAlgorithm();
+    }
 }

@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Niklas Ekman
+ * Copyright (c) 2021 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -36,32 +36,32 @@ use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
  */
 interface LuhnAlgorithmInterface
 {
-	/**
-	 * Determine if a number is valid according to the Luhn Algorithm.
-	 *
-	 * @param NumberInterface $number The number to validate.
-	 *
-	 * @return bool true if number is valid, false otherwise.
-	 *
-	 * @throws MissingCheckDigitException If the check digit in the number is not set.
-	 */
-	public function isValid(NumberInterface $number): bool;
+    /**
+     * Determine if a number is valid according to the Luhn Algorithm.
+     *
+     * @param NumberInterface $number The number to validate.
+     *
+     * @throws MissingCheckDigitException If the check digit in the number is not set.
+     * @return bool true if number is valid, false otherwise.
+     *
+     */
+    public function isValid(NumberInterface $number): bool;
 
-	/**
-	 * Calculate the check digit for an input.
-	 *
-	 * @param NumberInterface $number The number to calculate the check digit for.
-	 *
-	 * @return int The check digit.
-	 */
-	public function calcCheckDigit(NumberInterface $number): int;
+    /**
+     * Calculate the check digit for an input.
+     *
+     * @param NumberInterface $number The number to calculate the check digit for.
+     *
+     * @return int The check digit.
+     */
+    public function calcCheckDigit(NumberInterface $number): int;
 
-	/**
-	 * Calulates the checksum for number.
-	 *
-	 * @param NumberInterface $number The number to calculate the checksum for.
-	 *
-	 * @return int The checksum.
-	 */
-	public function calcChecksum(NumberInterface $number): int;
+    /**
+     * Calulates the checksum for number.
+     *
+     * @param NumberInterface $number The number to calculate the checksum for.
+     *
+     * @return int The checksum.
+     */
+    public function calcChecksum(NumberInterface $number): int;
 }

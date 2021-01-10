@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Niklas Ekman
+ * Copyright (c) 2021 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -36,93 +36,93 @@ use Serializable;
  */
 class Number implements NumberInterface, Serializable
 {
-	/**
-	 * @var string
-	 */
-	private $number;
+    /**
+     * @var string
+     */
+    private $number;
 
-	/**
-	 * @var int|null
-	 */
-	private $checkDigit;
+    /**
+     * @var int|null
+     */
+    private $checkDigit;
 
-	/**
-	 * @param string $number The number.
-	 * @param int|null $checkDigit [Optional] The check digit for the number.
-	 *
-	 * @throws ArgumentIsNotNumericException If the number input does not consist entirely of numbers.
-	 */
-	public function __construct(string $number, int $checkDigit = null)
-	{
-		if (!is_numeric($number)) {
-			throw new ArgumentIsNotNumericException($number);
-		}
+    /**
+     * @param string $number The number.
+     * @param int|null $checkDigit [Optional] The check digit for the number.
+     *
+     * @throws ArgumentIsNotNumericException If the number input does not consist entirely of numbers.
+     */
+    public function __construct(string $number, int $checkDigit = null)
+    {
+        if (!is_numeric($number)) {
+            throw new ArgumentIsNotNumericException($number);
+        }
 
-		$this->number = $number;
-		$this->checkDigit = $checkDigit;
-	}
+        $this->number = $number;
+        $this->checkDigit = $checkDigit;
+    }
 
-	/**
-	 * Create a new number from an input that contains the check digit
-	 * already.
-	 *
-	 * @param string $input The input that contains the check digit already.
-	 *
-	 * @return self
-	 *
-	 * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
-	 */
-	public static function fromString(string $input): self
-	{
-		$input = preg_replace('/[^\d]/', '', $input);
+    /**
+     * Create a new number from an input that contains the check digit
+     * already.
+     *
+     * @param string $input The input that contains the check digit already.
+     *
+     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
+     * @return self
+     *
+     */
+    public static function fromString(string $input): self
+    {
+        $input = preg_replace('/[^\d]/', '', $input);
 
-		if (!is_numeric($input)) {
-			throw new ArgumentIsNotNumericException($input);
-		}
+        if (!is_numeric($input)) {
+            throw new ArgumentIsNotNumericException($input);
+        }
 
-		$lastIndex = strlen($input) - 1;
+        $lastIndex = strlen($input) - 1;
 
-		// Get the last digit.
-		$checkDigit = (int)$input[$lastIndex];
+        // Get the last digit.
+        $checkDigit = (int)$input[$lastIndex];
 
-		// Remove the last digit.
-		$number = substr($input, 0, $lastIndex);
+        // Remove the last digit.
+        $number = substr($input, 0, $lastIndex);
 
-		return new self($number, $checkDigit);
-	}
+        return new self($number, $checkDigit);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getNumber(): string
-	{
-		return $this->number;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumber(): string
+    {
+        return $this->number;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getCheckDigit()
-	{
-		return $this->checkDigit;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheckDigit(): ?int
+    {
+        return $this->checkDigit;
+    }
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function __toString()
-	{
-		return $this->number . $this->checkDigit;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->number . $this->checkDigit;
+    }
 
-	public function serialize()
-	{
-		return serialize([$this->number, $this->checkDigit]);
-	}
+    public function serialize()
+    {
+        return serialize([$this->number, $this->checkDigit]);
+    }
 
-	public function unserialize($serialized)
-	{
-		list($this->number, $this->checkDigit) = unserialize($serialized);
-	}
+    public function unserialize($serialized)
+    {
+        [$this->number, $this->checkDigit] = unserialize($serialized);
+    }
 }

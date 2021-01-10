@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Niklas Ekman
+ * Copyright (c) 2021 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -31,8 +31,8 @@ use PHPUnit\Framework\TestCase;
 
 class LuhmAlgorithmFactoryTest extends TestCase
 {
-	public function testCreate()
-	{
-		$this->assertInstanceOf(LuhnAlgorithm::class, LuhnAlgorithmFactory::create());
-	}
+    public function testCreate()
+    {
+        $this->assertInstanceOf(LuhnAlgorithm::class, LuhnAlgorithmFactory::create());
+    }
 }

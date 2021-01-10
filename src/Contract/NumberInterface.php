@@ -3,7 +3,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Niklas Ekman
+ * Copyright (c) 2021 Niklas Ekman
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -32,17 +32,17 @@ namespace Nekman\LuhnAlgorithm\Contract;
  */
 interface NumberInterface
 {
-	/**
-	 * Get the number, without check digit.
-	 *
-	 * @return string
-	 */
-	public function getNumber(): string;
+    /**
+     * Get the number, without check digit.
+     *
+     * @return string
+     */
+    public function getNumber(): string;
 
-	/**
-	 * Get the check digit for the number.
-	 *
-	 * @return int|null The check digit or null if it has not been calculated yet.
-	 */
-	public function getCheckDigit();
+    /**
+     * Get the check digit for the number.
+     *
+     * @return int|null The check digit or null if it has not been calculated yet.
+     */
+    public function getCheckDigit(): ?int;
 }
