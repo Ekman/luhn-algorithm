@@ -16,7 +16,7 @@ executors:
     resource_class: small
 
 commands:
-  install_xdebug:
+  install_pcov_git:
     steps:
       - run:
           name: Install PCOV and Git
@@ -55,7 +55,7 @@ workflows:
           <<: *unit-tests
           flags: --coverage-clover coverage/clover.xml
           pre-steps:
-            - install_xdebug
+            - install_pcov_git
             - composer/install_bin
           post-steps:
             - run: php vendor/bin/php-coveralls --verbose
