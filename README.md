@@ -16,17 +16,17 @@ composer require nekman/luhn-algorithm
 ## Usage
 
 In order to instantiate a new instance of the library, use the factory:
- 
+
  ```php
  use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
- 
+
  $luhn = LuhnAlgorithmFactory::create();
  ```
 
 You can find [the library facade in the `LuhnAlgorithmInterface.php` file](src/Contract/LuhnAlgorithmInterface.php).
 
 [The `Number` class](src/Number.php) is a container class that holds the actual number and the check digit. It does no validation nor does it calculate the check digit. It exists to clearly separate the number from the check digit and to define when the check digit exists or not. To simplify the process of validating a number you can use the named constructor `Number::fromString()` like this:
- 
+
 ```php
 use Nekman\LuhnAlgorithm\Number;
 
@@ -49,3 +49,7 @@ $checksum = $luhn->calcChecksum($number);
 
 $checkDigit = $luhn->calcCheckDigit($number);
 ```
+
+## Changelog
+
+For a complete list of changes, and how to migrate between major versions, see [releases page](https://github.com/Ekman/luhn-algorithm/releases).
