@@ -29,7 +29,7 @@ use Nekman\LuhnAlgorithm\LuhnAlgorithm;
 use Nekman\LuhnAlgorithm\LuhnAlgorithmFactory;
 use PHPUnit\Framework\TestCase;
 
-class LuhmAlgorithmFactoryTest extends TestCase
+class LuhnAlgorithmFactoryTest extends TestCase
 {
     public function testCreate()
     {

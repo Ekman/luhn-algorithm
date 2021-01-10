@@ -1,17 +1,66 @@
 version: 2.1
-executors:
-  default:
-    docker:
-      - image: cimg/php:7.0
-      - image: cimg/php:7.1
-      - image: cimg/php:7.2
-      - image: cimg/php:7.3
-      - image: cimg/php:7.4
+
 orbs:
-  php-coveralls: nekman/php-coveralls@0.0.1
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.10
+  composer: stockfiller/composer@0.0.38
+  php-cs-fixer: stockfiller/php-cs-fixer@0.0.18
+  phpunit: stockfiller/phpunit@0.0.13
+
+executors:
+  php74:
+    docker:
+      - image: php:7.4-alpine
+    resource_class: small
+  php80:
+    docker:
+      - image: php:8.0-alpine
+    resource_class: small
+
+commands:
+  install_xdebug:
+    steps:
+      - run:
+          name: Install PCOV and Git
+          command: |-
+            apk add --update --no-cache ${PHPIZE_DEPS} git
+            pecl install pcov-1.0.6
+            docker-php-ext-enable pcov
+
 workflows:
-  foo:
+  master:
     jobs:
-      - php-coveralls/test_and_upload
-      - php-cs-fixer/fix
+      - phpunit/test: &unit-tests
+          name: unit-tests
+          matrix:
+            parameters:
+              executor:
+                - php74
+                - php80
+          pre-steps:
+            - composer/install_bin
+          filters:
+            branches:
+              only: master
+  branch:
+    jobs:
+      - php-cs-fixer/fix:
+          name: coding-standards
+          executor: php74
+          rules: "@PSR2"
+          pre-steps:
+            - composer/install_bin
+          filters: &branch-filters
+            branches:
+              ignore: master
+      - phpunit/test:
+          <<: *unit-tests
+          flags: --coverage-clover coverage/clover.xml
+          pre-steps:
+            - install_xdebug
+            - composer/install_bin
+          post-steps:
+            - run: php vendor/bin/php-coveralls --verbose
+            - store_artifacts:
+                path: coverage/clover.xml
+          filters: *branch-filters
+          requires:
+            - coding-standards

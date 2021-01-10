@@ -44,7 +44,6 @@
 		"php-coveralls/php-coveralls": "^2.1"
 	},
 	"scripts": {
-		"lint": "php-cs-fixer fix",
-		"test": "phpunit --configuration phpunit.xml"
+		"test": "phpunit"
 	}
 }
