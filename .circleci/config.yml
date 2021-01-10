@@ -24,9 +24,8 @@ commands:
           command: |-
             #!/bin/sh
             apk add --update --no-cache ${PHPIZE_DEPS}
-            yes | pecl install pcov-1.0.6
+            yes | pecl install --soft pcov-1.0.6
             docker-php-ext-enable pcov
-            apk del --purge --no-cache ${PHPIZE_DEPS}
 
 workflows:
   master:
