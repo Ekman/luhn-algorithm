@@ -60,7 +60,7 @@ class Number implements NumberInterface, Serializable
      * Create a new number from an input that contains the check digit already
      * @param string $input The input that contains the check digit already.
      * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
-	 * @throws LuhnAlgorithmExceptionInterface
+     * @throws LuhnAlgorithmExceptionInterface
      * @return self
      *
      */
