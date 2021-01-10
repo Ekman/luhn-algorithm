@@ -1,17 +1,59 @@
 version: 2.1
+
+orbs:
+  composer: stockfiller/composer@0.0.38
+  php-cs-fixer: stockfiller/php-cs-fixer@0.0.13
+  phpunit: stockfiller/phpunit@0.0.13
+
 executors:
   default:
     docker:
-      - image: cimg/php:7.0
-      - image: cimg/php:7.1
-      - image: cimg/php:7.2
-      - image: cimg/php:7.3
-      - image: cimg/php:7.4
-orbs:
-  php-coveralls: nekman/php-coveralls@0.0.1
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.10
+      - image: php:7.4-alpine
+  matrix:
+    docker:
+      - image: php:7.4-alpine
+      - image: php:8.0-alpine
+
+jobs:
+  test:
+    executor: matrix
+    environment:
+      CLOVER_PATH: coverage/clover.xml
+    steps:
+      - checkout
+      - composer/install
+      - phpunit/test:
+          flags: --coverage-clover ${CLOVER_PATH}
+          no-cache: false # not all phpunit versions supports ignoring cache
+      - run: php vendor/bin/php-coveralls --coverage_clover ${CLOVER_PATH}
+      - store_artifacts:
+          path: "${CLOVER_PATH}"
+
 workflows:
-  foo:
+  master:
     jobs:
-      - php-coveralls/test_and_upload
-      - php-cs-fixer/fix
+      - test: &test
+          pre-steps:
+            - run: |
+                apk add --update --no-cache ${PHPIZE_DEPS} wget
+                yes | pecl install xdebug-3.0.2
+                docker-php-ext-enable xdebug
+            - composer/install_bin
+          filters:
+            branches:
+              only: master
+  branch:
+    jobs:
+      - php-cs-fixer/fix:
+          name: coding-standards
+          executor: default
+          pre-steps:
+            - composer/install_bin
+          filters: &branch-filters
+            branches:
+              ignore: master
+      - test:
+          <<: *test
+          filters: *branch-filters
+          requires:
+            - coding-standards
