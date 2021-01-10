@@ -26,6 +26,7 @@ workflows:
   master:
     jobs:
       - phpunit/test: &test
+          executor: default
           pre-steps:
             - composer/install_bin
           filters:
