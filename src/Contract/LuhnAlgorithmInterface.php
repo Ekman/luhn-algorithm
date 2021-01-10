@@ -38,29 +38,25 @@ interface LuhnAlgorithmInterface
 {
     /**
      * Determine if a number is valid according to the Luhn Algorithm.
-     *
      * @param NumberInterface $number The number to validate.
-     *
      * @throws MissingCheckDigitException If the check digit in the number is not set.
+     * @throws LuhnAlgorithmExceptionInterface
      * @return bool true if number is valid, false otherwise.
-     *
      */
     public function isValid(NumberInterface $number): bool;
 
     /**
      * Calculate the check digit for an input.
-     *
      * @param NumberInterface $number The number to calculate the check digit for.
-     *
+     * @throws LuhnAlgorithmExceptionInterface
      * @return int The check digit.
      */
     public function calcCheckDigit(NumberInterface $number): int;
 
     /**
-     * Calulates the checksum for number.
-     *
+     * Calculates the checksum for number.
      * @param NumberInterface $number The number to calculate the checksum for.
-     *
+     * @throws LuhnAlgorithmExceptionInterface
      * @return int The checksum.
      */
     public function calcChecksum(NumberInterface $number): int;

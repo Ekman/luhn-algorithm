@@ -44,7 +44,6 @@ class LuhnAlgorithmFactory
 
     /**
      * Create a new instance of an implementation of the Luhn Algorithm.
-     *
      * @return LuhnAlgorithmInterface Implementation of the Luhn Algorithm.
      */
     public static function create(): LuhnAlgorithmInterface

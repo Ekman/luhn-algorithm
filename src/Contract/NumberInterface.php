@@ -34,14 +34,12 @@ interface NumberInterface
 {
     /**
      * Get the number, without check digit.
-     *
      * @return string
      */
     public function getNumber(): string;
 
     /**
      * Get the check digit for the number.
-     *
      * @return int|null The check digit or null if it has not been calculated yet.
      */
     public function getCheckDigit(): ?int;

@@ -31,9 +31,6 @@ use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmInterface;
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 use Nekman\LuhnAlgorithm\Exceptions\MissingCheckDigitException;
 
-/**
- * {@inheritdoc}
- */
 class LuhnAlgorithm implements LuhnAlgorithmInterface
 {
     /**

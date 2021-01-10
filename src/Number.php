@@ -43,7 +43,6 @@ class Number implements NumberInterface, Serializable
     /**
      * @param string $number The number.
      * @param int|null $checkDigit [Optional] The check digit for the number.
-     *
      * @throws ArgumentIsNotNumericException If the number input does not consist entirely of numbers.
      */
     public function __construct(string $number, int $checkDigit = null)
@@ -57,11 +56,8 @@ class Number implements NumberInterface, Serializable
     }
 
     /**
-     * Create a new number from an input that contains the check digit
-     * already.
-     *
+     * Create a new number from an input that contains the check digit already
      * @param string $input The input that contains the check digit already.
-     *
      * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      * @return self
      *
@@ -101,21 +97,17 @@ class Number implements NumberInterface, Serializable
         return $this->checkDigit;
     }
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->number . $this->checkDigit;
     }
 
-    public function serialize()
+    public function serialize(): string
     {
         return serialize([$this->number, $this->checkDigit]);
     }
 
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         [$this->number, $this->checkDigit] = unserialize($serialized);
     }
