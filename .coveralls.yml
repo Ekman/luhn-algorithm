@@ -1,3 +1,0 @@
-json_path: coverage/coveralls.json
-coverage_clover: coverage/clover.xml
-service_name: circleci
