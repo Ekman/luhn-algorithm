@@ -16,25 +16,39 @@ executors:
       - image: php:8.0-alpine
     resource_class: small
 
+commands:
+  test_coverage:
+    steps:
+      - run:
+          name: Install PCOV and git
+          command: |-
+            apk add --update --no-cache ${PHPIZE_DEPS} git
+            pecl install pcov-1.0.6
+            docker-php-ext-enable pcov
+      - checkout
+      - composer/install_bin
+      - composer/install
+      - phpunit/test:
+          flags: --coverage-clover coverage/clover.xml
+      - php-coveralls/upload:
+          clover-path: coverage/clover.xml
+
 workflows:
   master:
     jobs:
-      - phpunit/test: &unit-tests
-          name: unit-tests
+      - phpunit/test:
           matrix:
             parameters:
               executor:
                 - php74
                 - php80
-          pre-steps:
-            - composer/install_bin
+          pre-steps: [ composer/install_bin ]
           filters:
             branches:
               only: master
   branch:
     jobs:
       - php-cs-fixer/fix:
-          name: coding-standards
           executor: php74
           rules: "@PSR2"
           pre-steps:
@@ -43,18 +57,15 @@ workflows:
           filters: &branch-filters
             branches:
               ignore: master
-      - phpunit/test:
-          <<: *unit-tests
-          flags: --coverage-clover coverage/clover.xml
-          pre-steps:
-            - run: |-
-                apk add --update --no-cache ${PHPIZE_DEPS} git
-                pecl install pcov-1.0.6
-                docker-php-ext-enable pcov
-            - composer/install_bin
-          post-steps:
-            - php-coveralls/upload:
-                clover-path: coverage/clover.xml
+      - test_coverage:
+          executor: php74
           filters: *branch-filters
-          requires:
-            - coding-standards
+          requires: [ php-cs-fixer/fix ]
+      - phpunit/test:
+          matrix:
+            parameters:
+              executor:
+                - php80
+          pre-steps: [ composer/install_bin ]
+          filters: *branch-filters
+          requires: [ php-cs-fixer/fix ]
