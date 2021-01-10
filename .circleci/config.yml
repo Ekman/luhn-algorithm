@@ -2,17 +2,16 @@ version: 2.1
 
 orbs:
   composer: stockfiller/composer@0.0.38
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.16
+  php-cs-fixer: stockfiller/php-cs-fixer@0.0.18
   phpunit: stockfiller/phpunit@0.0.13
 
 executors:
-  default:
+  php74:
     docker:
       - image: php:7.4-alpine
     resource_class: small
-  matrix:
+  php80:
     docker:
-      - image: php:7.4-alpine
       - image: php:8.0-alpine
     resource_class: small
 
@@ -31,7 +30,11 @@ workflows:
     jobs:
       - phpunit/test: &unit-tests
           name: unit-tests
-          executor: matrix
+          matrix:
+            parameters:
+              executor:
+                - php74
+                - php80
           pre-steps:
             - composer/install_bin
           filters:
@@ -41,7 +44,7 @@ workflows:
     jobs:
       - php-cs-fixer/fix:
           name: coding-standards
-          executor: default
+          executor: php74
           rules: "@PSR2"
           pre-steps:
             - composer/install_bin
