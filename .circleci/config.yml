@@ -21,7 +21,7 @@ workflows:
           environment:
             CLOVER_PATH: coverage/clover.xml
           flags: --coverage-clover ${CLOVER_PATH}
-            no-cache: false # not all phpunit versions supports ignoring cache
+          no-cache: false # not all phpunit versions supports ignoring cache
           pre-steps:
             - run: |
                 apk add --update --no-cache ${PHPIZE_DEPS} wget
