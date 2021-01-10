@@ -27,6 +27,7 @@ declare(strict_types=1);
 
 namespace Nekman\LuhnAlgorithm;
 
+use Nekman\LuhnAlgorithm\Contract\LuhnAlgorithmExceptionInterface;
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
 use function Nekman\LuhnAlgorithm\Functions\string_is_numeric;
@@ -59,6 +60,7 @@ class Number implements NumberInterface, Serializable
      * Create a new number from an input that contains the check digit already
      * @param string $input The input that contains the check digit already.
      * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
+     * @throws LuhnAlgorithmExceptionInterface
      * @return self
      *
      */
