@@ -43,7 +43,7 @@ workflows:
           filters: &branch-filters
             branches:
               ignore: master
-      - test:
+      - phpunit/test:
           <<: *test
           filters: *branch-filters
           requires:
