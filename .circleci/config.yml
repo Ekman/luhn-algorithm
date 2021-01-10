@@ -38,8 +38,8 @@ workflows:
           executor: php74
           rules: "@PSR2"
           pre-steps:
-            - composer/install_bin
             - run: apk add --update --no-cache git
+            - composer/install_bin
           filters: &branch-filters
             branches:
               ignore: master
