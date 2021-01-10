@@ -29,6 +29,7 @@ namespace Nekman\LuhnAlgorithm;
 
 use Nekman\LuhnAlgorithm\Contract\NumberInterface;
 use Nekman\LuhnAlgorithm\Exceptions\ArgumentIsNotNumericException;
+use function Nekman\LuhnAlgorithm\Functions\string_is_numeric;
 use Serializable;
 
 /**
@@ -36,15 +37,8 @@ use Serializable;
  */
 class Number implements NumberInterface, Serializable
 {
-    /**
-     * @var string
-     */
-    private $number;
-
-    /**
-     * @var int|null
-     */
-    private $checkDigit;
+    private string $number;
+    private ?int $checkDigit;
 
     /**
      * @param string $number The number.
@@ -54,7 +48,7 @@ class Number implements NumberInterface, Serializable
      */
     public function __construct(string $number, int $checkDigit = null)
     {
-        if (!is_numeric($number)) {
+        if (!string_is_numeric($number)) {
             throw new ArgumentIsNotNumericException($number);
         }
 
@@ -76,7 +70,7 @@ class Number implements NumberInterface, Serializable
     {
         $input = preg_replace('/[^\d]/', '', $input);
 
-        if (!is_numeric($input)) {
+        if (!string_is_numeric($input)) {
             throw new ArgumentIsNotNumericException($input);
         }
 
