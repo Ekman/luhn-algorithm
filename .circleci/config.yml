@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   composer: stockfiller/composer@0.0.38
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.13
+  php-cs-fixer: stockfiller/php-cs-fixer@0.0.15
   phpunit: stockfiller/phpunit@0.0.13
 
 executors:
@@ -43,6 +43,7 @@ workflows:
       - php-cs-fixer/fix:
           name: coding-standards
           executor: default
+          rules: @PSR2
           pre-steps:
             - composer/install_bin
           filters: &branch-filters
