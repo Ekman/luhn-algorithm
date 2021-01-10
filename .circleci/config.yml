@@ -17,10 +17,13 @@ executors:
 commands:
   install_xdebug:
     steps:
-      - run: |
-          apk add --update --no-cache ${PHPIZE_DEPS} wget
-          yes | pecl install xdebug-3.0.2
-          docker-php-ext-enable xdebug
+      - run:
+          name: Install Xdebug
+          command: |-
+            #!/bin/sh
+            apk add --update --no-cache ${PHPIZE_DEPS} wget
+            yes | pecl install xdebug-3.0.2
+            docker-php-ext-enable xdebug
 
 workflows:
   master:
