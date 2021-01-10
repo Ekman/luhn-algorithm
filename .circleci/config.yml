@@ -18,9 +18,7 @@ workflows:
   master:
     jobs:
       - phpunit/test: &test
-          environment:
-            CLOVER_PATH: coverage/clover.xml
-          flags: --coverage-clover ${CLOVER_PATH}
+          flags: --coverage-clover coverage/clover.xml
           no-cache: false # not all phpunit versions supports ignoring cache
           pre-steps:
             - run: |
@@ -29,9 +27,9 @@ workflows:
                 docker-php-ext-enable xdebug
             - composer/install_bin
           post-steps:
-            - run: php vendor/bin/php-coveralls --coverage_clover ${CLOVER_PATH}
+            - run: php vendor/bin/php-coveralls --coverage_clover coverage/clover.xml
             - store_artifacts:
-                path: "${CLOVER_PATH}"
+                path: coverage/clover.xml
           filters:
             branches:
               only: master
