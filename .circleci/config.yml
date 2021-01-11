@@ -59,7 +59,6 @@ workflows:
             branches:
               ignore: master
       - test_coverage:
-          executor: php74
           filters: *branch-filters
           requires: [ php-cs-fixer/fix ]
       - phpunit/test:
