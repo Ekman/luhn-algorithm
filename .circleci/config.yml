@@ -16,7 +16,7 @@ executors:
       - image: php:8.0-alpine
     resource_class: small
 
-commands:
+jobs:
   test_coverage:
     steps:
       - run:
