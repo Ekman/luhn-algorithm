@@ -18,6 +18,7 @@ executors:
 
 jobs:
   test_coverage:
+    executor: php74
     steps:
       - run:
           name: Install PCOV and git
