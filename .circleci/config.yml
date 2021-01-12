@@ -52,6 +52,7 @@ workflows:
       - php-cs-fixer/fix:
           executor: php74
           rules: "@PSR2"
+          path: .
           pre-steps:
             - run: apk add --update --no-cache git openssh-client
             - composer/install_bin
