@@ -43,6 +43,7 @@ workflows:
   master:
     jobs:
       - phpunit/test:
+          test-path: tests
           matrix:
             parameters:
               executor:
