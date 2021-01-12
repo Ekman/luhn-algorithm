@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs:
-  composer: stockfiller/composer@0.0.38
-  php-cs-fixer: stockfiller/php-cs-fixer@0.0.18
+  composer: stockfiller/composer@2
+  php-cs-fixer: stockfiller/php-cs-fixer@1
   phpunit: stockfiller/phpunit@0.0.13
   php-coveralls: nekman/php-coveralls@0.0.5
 
