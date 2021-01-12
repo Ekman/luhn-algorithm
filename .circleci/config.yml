@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   composer: stockfiller/composer@2
   php-cs-fixer: stockfiller/php-cs-fixer@1
-  phpunit: stockfiller/phpunit@0.0.13
+  phpunit: stockfiller/phpunit@1
   php-coveralls: nekman/php-coveralls@0.0.5
 
 executors:
