@@ -44,6 +44,7 @@
 		"php-coveralls/php-coveralls": "^2.1"
 	},
 	"scripts": {
-		"test": "phpunit"
+		"test": "phpunit tests",
+		"lint": "php-cs-fixer fix --rules=@PSR2 ."
 	}
 }
