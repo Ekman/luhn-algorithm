@@ -34,8 +34,8 @@ jobs:
       - phpunit/test:
           coverage: clover
           coverage-path: "${CLOVER_PATH}"
-          src-dir: src
-          test-dir: tests
+          src-path: src
+          test-path: tests
       - php-coveralls/upload:
           clover-path: "${CLOVER_PATH}"
 
@@ -68,7 +68,7 @@ workflows:
           filters: *branch-filters
           requires: [ php-cs-fixer/fix ]
       - phpunit/test:
-          test-dir: tests
+          test-path: tests
           matrix:
             parameters:
               executor:
