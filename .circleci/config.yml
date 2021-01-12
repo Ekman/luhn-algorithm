@@ -19,6 +19,8 @@ executors:
 jobs:
   test_coverage:
     executor: php74
+    environment:
+      CLOVER_PATH: coverage/clover.xml
     steps:
       - run:
           name: Install PCOV and git
@@ -30,9 +32,12 @@ jobs:
       - composer/install_bin
       - composer/install
       - phpunit/test:
-          flags: --coverage-clover coverage/clover.xml
+          coverage: clover
+          coverage-path: "${CLOVER_PATH}"
+          src-dir: src
+          test-dir: test
       - php-coveralls/upload:
-          clover-path: coverage/clover.xml
+          clover-path: "${CLOVER_PATH}"
 
 workflows:
   master:
@@ -63,6 +68,7 @@ workflows:
           filters: *branch-filters
           requires: [ php-cs-fixer/fix ]
       - phpunit/test:
+          test-dir: test
           matrix:
             parameters:
               executor:
