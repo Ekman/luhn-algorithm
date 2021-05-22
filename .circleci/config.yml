@@ -42,19 +42,6 @@ jobs:
 workflows:
   master:
     jobs:
-      - phpunit/test:
-          test-path: tests
-          matrix:
-            parameters:
-              executor:
-                - php74
-                - php80
-          pre-steps: [ composer/install_bin ]
-          filters:
-            branches:
-              only: master
-  branch:
-    jobs:
       - php-cs-fixer/fix:
           executor: php74
           rules: "@PSR2"
@@ -62,12 +49,10 @@ workflows:
           pre-steps:
             - run: apk add --update --no-cache git openssh-client
             - composer/install_bin
-          filters: &branch-filters
+          filters:
             branches:
               ignore: master
-      - test_coverage:
-          filters: *branch-filters
-          requires: [ php-cs-fixer/fix ]
+      - test_coverage
       - phpunit/test:
           test-path: tests
           matrix:
@@ -75,5 +60,3 @@ workflows:
               executor:
                 - php80
           pre-steps: [ composer/install_bin ]
-          filters: *branch-filters
-          requires: [ php-cs-fixer/fix ]
