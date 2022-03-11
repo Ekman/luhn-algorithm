@@ -59,10 +59,10 @@ class Number implements NumberInterface, Serializable
     /**
      * Create a new number from an input that contains the check digit already
      * @param string $input The input that contains the check digit already.
-     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
-     * @throws LuhnAlgorithmExceptionInterface
      * @return self
      *
+     * @throws LuhnAlgorithmExceptionInterface
+     * @throws ArgumentIsNotNumericException If the input does not consist entirely of numbers.
      */
     public static function fromString(string $input): self
     {
@@ -83,12 +83,9 @@ class Number implements NumberInterface, Serializable
         return new self($number, $checkDigit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getNumber(): string
+    public function __toString(): string
     {
-        return $this->number;
+        return $this->number . $this->checkDigit;
     }
 
     /**
@@ -99,18 +96,31 @@ class Number implements NumberInterface, Serializable
         return $this->checkDigit;
     }
 
-    public function __toString(): string
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumber(): string
     {
-        return $this->number . $this->checkDigit;
+        return $this->number;
     }
 
     public function serialize(): string
     {
-        return serialize([$this->number, $this->checkDigit]);
+        return serialize($this->__serialize());
     }
 
-    public function unserialize($serialized): void
+    public function __serialize(): array
     {
-        [$this->number, $this->checkDigit] = unserialize($serialized);
+        return [$this->number, $this->checkDigit];
+    }
+
+    public function unserialize($data): void
+    {
+        $this->__unserialize(unserialize($data));
+    }
+
+    public function __unserialize(array $data): void
+    {
+        [$this->number, $this->checkDigit] = $data;
     }
 }
