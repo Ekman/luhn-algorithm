@@ -27,6 +27,10 @@ executors:
     docker:
       - image: php:8.3-alpine
     resource_class: small
+  php84:
+    docker:
+      - image: php:8.4-alpine
+    resource_class: small
 
 jobs:
   test_coverage:
@@ -74,4 +78,5 @@ workflows:
                 - php81
                 - php82
                 - php83
+                - php84
           pre-steps: [ composer/install_bin ]
