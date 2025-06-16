@@ -46,7 +46,7 @@ class Number implements NumberInterface, Serializable
      * @param int|null $checkDigit [Optional] The check digit for the number.
      * @throws ArgumentIsNotNumericException If the number input does not consist entirely of numbers.
      */
-    public function __construct(string $number, int $checkDigit = null)
+    public function __construct(string $number, ?int $checkDigit = null)
     {
         if (!string_is_numeric($number)) {
             throw new ArgumentIsNotNumericException($number);
