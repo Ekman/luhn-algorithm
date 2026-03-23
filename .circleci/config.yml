@@ -33,7 +33,7 @@ executors:
     resource_class: small
   php85:
     docker:
-      - image: php:8.5-rc-alpine
+      - image: php:8.5-alpine
     resource_class: small
 
 jobs:
